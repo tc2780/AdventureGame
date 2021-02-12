@@ -73,4 +73,12 @@ class CharacterTest {
         test.gainLoseProgress(-150);
         assertEquals(0, test.getProgress());
     }
+
+    @Test
+    public void testStillAlive() {
+        assertTrue(test.stillAlive());
+
+        test.healOrDamage(-200);
+        assertFalse(test.stillAlive());
+    }
 }

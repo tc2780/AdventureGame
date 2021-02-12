@@ -12,7 +12,6 @@ Progress will never be able to reach below 0, but if health is ever <= 0, the us
 
 Between each obstacle, the user should be able to:
 - view current progress
-- view journey log
 - view inventory & use item if possible
 - view current health
 - continue on journey

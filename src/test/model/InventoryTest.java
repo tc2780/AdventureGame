@@ -63,6 +63,42 @@ public class InventoryTest {
     }
 
     @Test
+    public void testGetItemAtIndex() {
+        test.addItem(a);
+        assertEquals(a, test.getItemAtIndex(1));
+        assertEquals(0, test.length());
+
+        test.addItem(a);
+        test.addItem(b);
+        assertEquals(a, test.getItemAtIndex(1));
+        assertEquals(1, test.length());
+        assertEquals(b, test.getItemAtIndex(1));
+        assertEquals(0, test.length());
+
+        test.addItem(a);
+        test.addItem(b);
+        test.addItem(c);
+        assertEquals(b, test.getItemAtIndex(2));
+        assertEquals("[" + a.getName() + ", " + c.getName() + "]", test.getAllItemNames());
+    }
+
+    @Test
+    public void testGetItemAtIndexIllegalParameter() {
+        IllegalArgumentException exc = assertThrows(IllegalArgumentException.class,
+                () -> { test.getItemAtIndex(1);}
+        );
+
+        assertEquals("no item at this index", exc.getMessage());
+
+        IllegalArgumentException exc2 = assertThrows(IllegalArgumentException.class,
+                () -> { test.getItemAtIndex(-1);}
+        );
+
+        assertEquals("no item at this index", exc.getMessage());
+
+    }
+
+    @Test
     public void testHaveItem() {
         assertFalse(test.haveItem("yellow"));
 

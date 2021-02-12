@@ -12,6 +12,13 @@ public class Inventory {
         items = new ArrayList<>();
     }
 
+    //constructor for chest
+    public Inventory(Item a, Item b) {
+        items = new ArrayList<>();
+        items.add(a);
+        items.add(b);
+    }
+
     public ArrayList<Item> getItems() {
         return items;
     }
@@ -39,6 +46,7 @@ public class Inventory {
     }
 
     //REQUIRES: item of given name to be in items
+    //MODIFIES: this
     //EFFECTS: return Item in items with given name, and removes from
     //         inventory
     public Item getItem(String name) throws IllegalArgumentException {
@@ -55,6 +63,21 @@ public class Inventory {
         Item x = items.get(i);
         items.remove(i);
         return x;
+    }
+
+    //REQUIRES: there must be an item at the index
+    //MODIFIES: this
+    //EFFECTS: return Item in items with given name, and removes from
+    //         inventory
+    public Item getItemAtIndex(int i) {
+        i--;
+        if (i >= items.size() || i < 0) {
+            throw new IllegalArgumentException("no item at this index");
+        }
+
+        Item item = items.get(i);
+        items.remove(item);
+        return item;
     }
 
     //EFFECTS: returns a string of all the item names

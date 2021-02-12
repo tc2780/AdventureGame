@@ -46,30 +46,30 @@ public class ObstacleTest { //15 possible scenarios (listed below)
     }
 
     public void setUpChosenOptions() {
-        a.setChosenOption('A');
-        b.setChosenOption('B');
-        c.setChosenOption('C');
-        d.setChosenOption('A');
-        e.setChosenOption('B');
-        f.setChosenOption('C');
-        g.setChosenOption('A');
-        h.setChosenOption('B');
-        i.setChosenOption('C');
-        j.setChosenOption('A');
-        k.setChosenOption('B');
-        l.setChosenOption('C');
-        m.setChosenOption('A');
-        n.setChosenOption('B');
-        o.setChosenOption('C');
-        ran.setChosenOption('A');
+        a.setChosenOption("A");
+        b.setChosenOption("B");
+        c.setChosenOption("C");
+        d.setChosenOption("A");
+        e.setChosenOption("B");
+        f.setChosenOption("C");
+        g.setChosenOption("A");
+        h.setChosenOption("B");
+        i.setChosenOption("C");
+        j.setChosenOption("A");
+        k.setChosenOption("B");
+        l.setChosenOption("C");
+        m.setChosenOption("A");
+        n.setChosenOption("B");
+        o.setChosenOption("C");
+        ran.setChosenOption("A");
     }
 
     @Test  //test set and get
     public void testChosenOption() {
         Obstacle test = new Obstacle(1);
-        assertEquals('a', test.getChosenOption());
-        test.setChosenOption('C');
-        assertEquals('C', test.getChosenOption());
+        assertEquals("Z", test.getChosenOption());
+        test.setChosenOption("C");
+        assertEquals("C", test.getChosenOption());
     }
 
     @Test
@@ -164,25 +164,25 @@ public class ObstacleTest { //15 possible scenarios (listed below)
 
     @Test
     public void testLookUpObstacle() {
-        assertEquals("You encountered a living tree. It looks happy to see you.", a.lookUpObstacle());
-        assertEquals("You encountered a living tree. It looks happy to see you.", b.lookUpObstacle());
-        assertEquals("You encountered a living tree. It looks happy to see you.", c.lookUpObstacle());
+        assertEquals("You encounter a living tree. It looks happy to see you.", a.lookUpObstacle());
+        assertEquals("You encounter a living tree. It looks happy to see you.", b.lookUpObstacle());
+        assertEquals("You encounter a living tree. It looks happy to see you.", c.lookUpObstacle());
 
-        assertEquals("You encountered a blue and white panda. He seems angry...", d.lookUpObstacle());
-        assertEquals("You encountered a blue and white panda. He seems angry...", e.lookUpObstacle());
-        assertEquals("You encountered a blue and white panda. He seems angry...", f.lookUpObstacle());
+        assertEquals("You encounter a blue and white panda. He seems angry...", d.lookUpObstacle());
+        assertEquals("You encounter a blue and white panda. He seems angry...", e.lookUpObstacle());
+        assertEquals("You encounter a blue and white panda. He seems angry...", f.lookUpObstacle());
 
-        assertEquals("You encountered a paper plane. It's lying on the floor menacingly", g.lookUpObstacle());
-        assertEquals("You encountered a paper plane. It's lying on the floor menacingly", h.lookUpObstacle());
-        assertEquals("You encountered a paper plane. It's lying on the floor menacingly", i.lookUpObstacle());
+        assertEquals("You encounter a paper plane. It's lying on the floor menacingly", g.lookUpObstacle());
+        assertEquals("You encounter a paper plane. It's lying on the floor menacingly", h.lookUpObstacle());
+        assertEquals("You encounter a paper plane. It's lying on the floor menacingly", i.lookUpObstacle());
 
-        assertEquals("You encountered a lemon. It is a very bright yellow.", j.lookUpObstacle());
-        assertEquals("You encountered a lemon. It is a very bright yellow.", k.lookUpObstacle());
-        assertEquals("You encountered a lemon. It is a very bright yellow.", l.lookUpObstacle());
+        assertEquals("You encounter a lemon. It is a very bright yellow.", j.lookUpObstacle());
+        assertEquals("You encounter a lemon. It is a very bright yellow.", k.lookUpObstacle());
+        assertEquals("You encounter a lemon. It is a very bright yellow.", l.lookUpObstacle());
 
-        assertEquals("You encountered a huge boulder. On top is a goat.", m.lookUpObstacle());
-        assertEquals("You encountered a huge boulder. On top is a goat.", n.lookUpObstacle());
-        assertEquals("You encountered a huge boulder. On top is a goat.", o.lookUpObstacle());
+        assertEquals("You encounter a huge boulder. On top is a goat.", m.lookUpObstacle());
+        assertEquals("You encounter a huge boulder. On top is a goat.", n.lookUpObstacle());
+        assertEquals("You encounter a huge boulder. On top is a goat.", o.lookUpObstacle());
     }
 
     @Test
@@ -190,19 +190,19 @@ public class ObstacleTest { //15 possible scenarios (listed below)
         String str;
         switch (ran.getNum()) {
             case 1:
-                str = "You encountered a living tree. It looks happy to see you.";
+                str = "You encounter a living tree. It looks happy to see you.";
                 break;
             case 2:
-                str = "You encountered a blue and white panda. He seems angry...";
+                str = "You encounter a blue and white panda. He seems angry...";
                 break;
             case 3:
-                str = "You encountered a paper plane. It's lying on the floor menacingly";
+                str = "You encounter a paper plane. It's lying on the floor menacingly";
                 break;
             case 4:
-                str = "You encountered a lemon. It is a very bright yellow.";
+                str = "You encounter a lemon. It is a very bright yellow.";
                 break;
             default:
-                str = "You encountered a huge boulder. On top is a goat.";
+                str = "You encounter a huge boulder. On top is a goat.";
         }
 
         assertEquals(str, ran.lookUpObstacle());
@@ -306,7 +306,7 @@ public class ObstacleTest { //15 possible scenarios (listed below)
     @Test
     public void testChoiceNotChosenYet() {
         Obstacle test = new Obstacle();
-        assertEquals('a', test.getChosenOption());
+        assertEquals("Z", test.getChosenOption());
         assertEquals("User has not selected option yet.", test.setUpResult());
 
     }
@@ -316,31 +316,31 @@ public class ObstacleTest { //15 possible scenarios (listed below)
 All scenatios:
 
 obs:
-1. "You encountered a living tree. It looks happy to see you."
+1. "You encounter a living tree. It looks happy to see you."
     options:
     A: Try to walk around it.     (a)
     B: Set it on fire.            (b)
     C: Wave."                     (c)
 
-2. "You encountered a blue and white panda. He seems angry..."
+2. "You encounter a blue and white panda. He seems angry..."
     options:
     A: Give it some water.       (d)
     B: Poke it.                  (e)
     C: Engage in a stare off.    (f)
 
-3. "You encountered a paper plane. It's lying on the floor menacingly"
+3. "You encounter a paper plane. It's lying on the floor menacingly"
     options:
     A: Pick it up.               (g)
     B: Put a rock on it.         (h)
     C: Make it a friend.         (i)
 
-4. "You encountered a lemon. It is a very bright yellow."
+4. "You encounter a lemon. It is a very bright yellow."
     options:
     A: Pick it up and eat it.    (j)
     B: Step over it.             (k)
     C: Give it googly eyes.      (l)
 
-5. "You encountered a huge boulder. On top is a goat."
+5. "You encounter a huge boulder. On top is a goat."
     options:
     A: Try to climb the boulder. (m)
     B: Throw a leaf at the goat. (n)

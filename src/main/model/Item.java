@@ -49,26 +49,22 @@ public class Item {
     //         - currently, 5 possible items, each which modifies
     //           changeInHealth and changeInProgress as needed
     public void setUpItem() {
-        switch (num) {
-            case 1:
-                changesForA();
-                name = "A purple kiwi";
-                break;
-            case 2:
-                changesForB();
-                name = "A water bottle filled with an unknown substance";
-                break;
-            case 3:
-                changeInProgress = 30;
-                name = "A feather that shimmers brown and gold";
-                break;
-            case 4:
-                changesForD();
-                name = "Seems to be a book with the front cover ripped off";
-                break;
-            default:
-                changeInHealth = -30;
-                name = "A ladybug. An actual live animal. That was in a chest";
+
+        if (num == 1) {
+            changesForA();
+            name = "A purple kiwi";
+        } else if (num == 2) {
+            changesForB();
+            name = "A water bottle filled with an unknown substance";
+        } else if (num == 3) {
+            changeInProgress = 30;
+            name = "A feather that shimmers brown and gold";
+        } else if (num == 4) {
+            changesForD();
+            name = "Seems to be a book with the front cover ripped off";
+        } else {
+            changeInHealth = -30;
+            name = "A ladybug. An actual live animal. That was in a chest";
         }
     }
 

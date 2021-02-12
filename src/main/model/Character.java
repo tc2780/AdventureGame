@@ -79,4 +79,11 @@ public class Character {
             progress += num;
         }
     }
+
+    public boolean stillAlive() {
+        if (health == 0) {
+            return false;
+        }
+        return true;
+    }
 }
