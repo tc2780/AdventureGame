@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Character {
     private String name;
-  //  private Inventory inventory;
+    //  private Inventory inventory;
     private int progress;
-    private int health;
+    private int health; //[0, 100], once 0, can not raise cause death
     //private ArrayList<String> log;
 
     //EFFECTS: create new character with given name, base health is 100,
     //         and progress = 0
     public Character(String name) {
         this.name = name;
-   //     inventory = new Inventory();
+        //     inventory = new Inventory();
         progress = 0;
         health = 100;
         //log = new ArrayList<>();
@@ -55,14 +55,28 @@ public class Character {
     }
 
     //MODIFIES: this (health)
-    //EFFECTS: health raises or lowers depending on num given
+    //EFFECTS: health raises or lowers depending on num given,
+    //         lowest possible health is 0, highest is 100
     public void healOrDamage(int num) {
-        health += num;
+        if (health + num <= 0) {
+            health = 0;
+        } else if (health + num >= 100) {
+            health = 100;
+        } else {
+            health += num;
+        }
     }
 
     //MODIFIES: this (progress)
-    //EFFECTS: progress raises or lowers depending on num given
+    //EFFECTS: progress raises or lowers depending on num given,
+    //         lowest is 0, highest 100
     public void gainLoseProgress(int num) {
-        progress += num;
+        if (progress + num <= 0) {
+            progress = 0;
+        } else if (progress + num >= 100) {
+            progress = 100;
+        } else {
+            progress += num;
+        }
     }
 }

@@ -24,6 +24,11 @@ public class Item {
         setUpItem();
     }
 
+    //EFFECTS: returns scenario number ---> mostly for testing purposes
+    public int getNum() {
+        return num;
+    }
+
     //EFFECTS: returns change in health of item
     public int getChangeInHealth() {
         return changeInHealth;
@@ -46,22 +51,40 @@ public class Item {
     public void setUpItem() {
         switch (num) {
             case 1:
-                changeInHealth = 20;
-                name = "A purple kiwi.";
+                changesForA();
+                name = "A purple kiwi";
+                break;
             case 2:
-                changeInProgress = 20;
-                changeInHealth = -10;
-                name = "A water bottle filled with an unknown substance.";
+                changesForB();
+                name = "A water bottle filled with an unknown substance";
+                break;
             case 3:
                 changeInProgress = 30;
-                name = "A feather that shimmers brown and gold.";
+                name = "A feather that shimmers brown and gold";
+                break;
             case 4:
-                changeInProgress = 10;
-                changeInHealth = 20;
-                name = "Seems to be a book with the front cover ripped off.";
+                changesForD();
+                name = "Seems to be a book with the front cover ripped off";
+                break;
             default:
                 changeInHealth = -30;
-                name = "A ladybug. An actual live animal. That was in a chest.";
+                name = "A ladybug. An actual live animal. That was in a chest";
         }
+    }
+
+    // methods below to help shorten setUp()
+    private void changesForA() {
+        changeInHealth = 20;
+        changeInProgress = -20;
+    }
+
+    private void changesForB() {
+        changeInProgress = 20;
+        changeInHealth = -10;
+    }
+
+    private void changesForD() {
+        changeInProgress = -10;
+        changeInHealth = 20;
     }
 }
