@@ -2,18 +2,23 @@ package model;
 
 import java.util.Random;
 
+//represents an item that has a string name, an int that represents the item, and a
+//     a change in health and progress that represents the effects of the item
 public class Item {
-    private String name;
-    private int changeInHealth; //item either heals or gives damage
-    private int changeInProgress;  //item either raises or lowers progress
-    private int num; //between 1-5, set's up the item and it's characteristics
+    private String name;            //name of item
+    private int changeInHealth;     //item either heals or gives damage
+    private int changeInProgress;   //item either raises or lowers progress
+    private int num;                //between 1-5, set's up the item and it's characteristics
 
+    //EFFECTS: init change in health and progress to be 0 (some items don't change health and/or progress);
+    //         also assigns item a random int between 1-5 which correlates to a specific item;
+    //         setUpItem will set fields to match an items effects
     public Item() {
         changeInHealth = 0;
         changeInProgress = 0;
         Random r = new Random();
         num = r.nextInt(5) + 1; //returns num in range [1, 5]
-        setUpItem(); //sets up item, and returns name, which is stored
+        setUpItem(); //sets up item
     }
 
     //constructor for testing purposes
@@ -61,24 +66,31 @@ public class Item {
             name = "A feather that shimmers brown and gold";
         } else if (num == 4) {
             changesForD();
-            name = "Seems to be a book with the front cover ripped off";
+            name = "A book that looks like it's been dipped in mud and dried under the sun";
         } else {
             changeInHealth = -30;
-            name = "A ladybug. An actual live animal. That was in a chest";
+            name = "A ladybug. An actual live animal";
         }
     }
 
-    // methods below to help shorten setUp()
+    //methods below to help shorten setUpItem
+
+    //MODIFIES: this
+    // EFFECTS: the changes that happen when int is 1, sets fields to match item
     private void changesForA() {
         changeInHealth = 20;
         changeInProgress = -20;
     }
 
+    //MODIFIES: this
+    // EFFECTS: the changes that happen when int is 1, sets fields to match item
     private void changesForB() {
         changeInProgress = 20;
         changeInHealth = -10;
     }
 
+    //MODIFIES: this
+    // EFFECTS: the changes that happen when int is 1, sets fields to match item
     private void changesForD() {
         changeInProgress = -10;
         changeInHealth = 20;

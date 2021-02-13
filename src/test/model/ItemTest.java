@@ -93,8 +93,8 @@ public class ItemTest {
         assertEquals("A purple kiwi", a.getName());
         assertEquals("A water bottle filled with an unknown substance", b.getName());
         assertEquals("A feather that shimmers brown and gold", c.getName());
-        assertEquals("Seems to be a book with the front cover ripped off", d.getName());
-        assertEquals("A ladybug. An actual live animal. That was in a chest", e.getName());
+        assertEquals("A book that looks like it's been dipped in mud and dried under the sun", d.getName());
+        assertEquals("A ladybug. An actual live animal", e.getName());
 
         String str;
         switch (random.getNum()) {
@@ -108,9 +108,9 @@ public class ItemTest {
                 str = "A feather that shimmers brown and gold";
                 break;
             case 4:
-                str = "Seems to be a book with the front cover ripped off";
+                str = "A book that looks like it's been dipped in mud and dried under the sun";
                 break;
-            default: str = "A ladybug. An actual live animal. That was in a chest";
+            default: str = "A ladybug. An actual live animal";
         }
         assertEquals(str, random.getName());
     }

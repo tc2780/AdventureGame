@@ -2,31 +2,33 @@ package model;
 
 import java.util.ArrayList;
 
+//represents an inventory that can hold items
 public class Inventory {
 
-    private static int MAX_INVENTORY_SPACE = 3;
+    private static int MAX_INVENTORY_SPACE = 3;      //max inventory space
+    private ArrayList<Item> items;                   //arraylist of items
 
-    private ArrayList<Item> items;   //arraylist of items
-
+    //constructs a new inventory (arraylist of items)
     public Inventory() {
         items = new ArrayList<>();
     }
 
-    //constructor for chest
+    //constructor specifically for chest
     public Inventory(Item a, Item b) {
         items = new ArrayList<>();
         items.add(a);
         items.add(b);
     }
 
+    //EFFECTS: returns all items
     public ArrayList<Item> getItems() {
         return items;
     }
 
     //REQUIRES: an Item to be passed
     //MODIFIES: this
-    //EFFECTS: if inventory adds space, adds item to items, and return true,
-    //         else return false;
+    //EFFECTS: if inventory has space, adds item to items, and returns true;
+    //         else does not modify items, and return false;
     public boolean addItem(Item obj) {
         if (items.size() < MAX_INVENTORY_SPACE) {
             items.add(obj);

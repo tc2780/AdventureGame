@@ -272,7 +272,7 @@ public class ObstacleTest { //15 possible scenarios (listed below)
 
         assertEquals("It is extremely sour. Make 20 progress, but lose 40HP.", j.getResult());
         assertEquals("You step over it and fall right into a trap. Lose 20 progress, and lose 30HP.", k.getResult());
-        assertEquals("A toothy smile appears below the eyes. Make 40 progress, gain 10 HP..", l.getResult());
+        assertEquals("A toothy smile appears below the eyes. Make 40 progress, gain 10 HP.", l.getResult());
 
         assertEquals("You fall and break your little toe. Lose 10 progress, and lose 40 HP.", m.getResult());
         assertEquals("The goat eats the leaf. In thanks, it opens a tunnel for you to pass"

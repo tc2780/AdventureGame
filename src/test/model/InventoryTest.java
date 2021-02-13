@@ -87,15 +87,12 @@ public class InventoryTest {
         IllegalArgumentException exc = assertThrows(IllegalArgumentException.class,
                 () -> { test.getItemAtIndex(1);}
         );
-
         assertEquals("no item at this index", exc.getMessage());
 
         IllegalArgumentException exc2 = assertThrows(IllegalArgumentException.class,
                 () -> { test.getItemAtIndex(-1);}
         );
-
         assertEquals("no item at this index", exc.getMessage());
-
     }
 
     @Test

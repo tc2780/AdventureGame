@@ -2,18 +2,25 @@ package model;
 
 import java.util.Random;
 
+//represents an obstacle that has an int corresponding to its specific scenario, a string for the chosen option
+//     in face of the obstacle, a string result resulting from specific scenario and chosen option,
+//     and change in health and progress that correlate to effects given from result
 public class Obstacle {
 
-    private int obs; // 1-5
-    private String chosenOption; //given options A-C, this is users chosen option
-    private int changeInHealth; //change in health based on scenario
-    private int changeInProgress; // change in progress based on scenario
-    private String result;
+    private int obs;                //an int representing the specific scenario (1 <= obs <= 5)
+    private String chosenOption;    //given options A-C, this is users chosen option
+    private int changeInHealth;     //change in health based on scenario
+    private int changeInProgress;   //change in progress based on scenario
+    private String result;          //result based on chosen option and obs
 
+    //EFFECTS: obs is given a randon scenario number btwn 1-5;
+    //         chosenOption is set to Z, representing the fact that the user has not selected an option,
+    //         init change in health and progress to be 0 (some obstacles don't change health and/or progress)
+    //         and init result to be ""
     public Obstacle() {
         Random r = new Random();
         obs = r.nextInt(5) + 1; //returns int btwn [1, 5]
-        chosenOption = "Z"; //default option set to d, which is not a-c
+        chosenOption = "Z";            //default option set to z, which is not a-c
         changeInHealth = 0;
         changeInProgress = 0;
         result = "";
@@ -28,27 +35,35 @@ public class Obstacle {
         result = "";
     }
 
+    //EFFECTS: returns the result; default is ""
     public String getResult() {
         return result;
     }
 
+    //EFFECTS: returns scenario number of obstacle
     public int getNum() {
         return obs;
     }
 
+    //EFFECTS: returns chosen option
     public String getChosenOption() {
         return chosenOption;
     }
 
+    //REQUIRES: x to be "A", "B", or "C"
+    //MODIFIES: this
+    //EFFECTS: sets chosenOption to given string x
     public void setChosenOption(String x) {
         chosenOption = x;
         result = setUpResult();
     }
 
+    //EFFECTS: returns change in health of obstacle
     public int getChangeInHealth() {
         return changeInHealth;
     }
 
+    //EFFECTS: returns change in progress of obstacle
     public int getChangeInProgress() {
         return changeInProgress;
     }
@@ -70,7 +85,7 @@ public class Obstacle {
         }
     }
 
-    // EFFECTS: returns 3 options for each scenario
+    // EFFECTS: returns a string representing the 3 options for each scenario
     public String getOptions() {
         if (obs == 1) {
             return "A: Try to walk around it. \nB: Set it on fire. \nC: Wave.";
@@ -86,6 +101,7 @@ public class Obstacle {
     }
 
     //REQUIRES: chosenOption to be A-C,
+    //MODIFIES: this
     //EFFECTS: return a result string based on obs and on chosenOption
     public String setUpResult() {
         if (chosenOption.equals("Z")) {
@@ -178,7 +194,7 @@ public class Obstacle {
         } else {
             changeInProgress = 40;
             changeInHealth = 10;
-            return "A toothy smile appears below the eyes. Make 40 progress, gain 10 HP..";
+            return "A toothy smile appears below the eyes. Make 40 progress, gain 10 HP.";
         }
     }
 
