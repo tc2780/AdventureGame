@@ -13,7 +13,7 @@ public class Obstacle {
     private int changeInProgress;   //change in progress based on scenario
     private String result;          //result based on chosen option and obs
 
-    //EFFECTS: obs is given a randon scenario number btwn 1-5;
+    //EFFECTS: obs is given a random scenario number btwn 1-5;
     //         chosenOption is set to Z, representing the fact that the user has not selected an option,
     //         init change in health and progress to be 0 (some obstacles don't change health and/or progress)
     //         and init result to be ""
@@ -26,7 +26,7 @@ public class Obstacle {
         result = "";
     }
 
-    //constructor for testing purposes, 1 <= n <= 5
+    //constructor mostly for testing purposes, 1 <= n <= 5
     public Obstacle(int n) {
         obs = n;
         chosenOption = "Z";
@@ -52,7 +52,8 @@ public class Obstacle {
 
     //REQUIRES: x to be "A", "B", or "C"
     //MODIFIES: this
-    //EFFECTS: sets chosenOption to given string x
+    //EFFECTS: sets chosenOption to given string x, and modifies result to match the expected result
+    //         from the scenario and the given chosen option
     public void setChosenOption(String x) {
         chosenOption = x;
         result = setUpResult();
@@ -85,7 +86,7 @@ public class Obstacle {
         }
     }
 
-    // EFFECTS: returns a string representing the 3 options for each scenario
+    // EFFECTS: returns a string representing the 3 options for each specific scenario
     public String getOptions() {
         if (obs == 1) {
             return "A: Try to walk around it. \nB: Set it on fire. \nC: Wave.";
@@ -102,7 +103,7 @@ public class Obstacle {
 
     //REQUIRES: chosenOption to be A-C,
     //MODIFIES: this
-    //EFFECTS: return a result string based on obs and on chosenOption
+    //EFFECTS: return a result string based on obs and chosenOption
     public String setUpResult() {
         if (chosenOption.equals("Z")) {
             return "User has not selected option yet.";

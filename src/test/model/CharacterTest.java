@@ -38,19 +38,19 @@ class CharacterTest {
     public void testHealOrDamage() {
         assertEquals(100, test.getHealth());
 
-        test.healOrDamage(-50);
+        test.gainLoseHealth(-50);
         assertEquals(50, test.getHealth());
 
-        test.healOrDamage(-50);
+        test.gainLoseHealth(-50);
         assertEquals(0, test.getHealth());
 
-        test.healOrDamage(-50);
+        test.gainLoseHealth(-50);
         assertEquals(0, test.getHealth());
 
-        test.healOrDamage(50);
+        test.gainLoseHealth(50);
         assertEquals(50, test.getHealth());
 
-        test.healOrDamage(100);
+        test.gainLoseHealth(100);
         assertEquals(100, test.getHealth());
     }
 
@@ -78,7 +78,7 @@ class CharacterTest {
     public void testStillAlive() {
         assertTrue(test.stillAlive());
 
-        test.healOrDamage(-200);
+        test.gainLoseHealth(-200);
         assertFalse(test.stillAlive());
     }
 }

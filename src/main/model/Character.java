@@ -1,13 +1,11 @@
 package model;
 
-import java.util.ArrayList;
 
 // Represents a character, with a name, progress and health
 public class Character {
     private String name;  //characters name
     private int progress; //current progress of character -> [0, 100]
     private int health;   //[0, 100], once 0, can not raise cause death
-    //private ArrayList<String> log;
 
     //EFFECTS: create new character with given name, base health is 100,
     //         and progress = 0
@@ -15,7 +13,6 @@ public class Character {
         this.name = name;
         progress = 0;
         health = 100;
-        //log = new ArrayList<>();
     }
 
     //EFFECTS: returns characters name
@@ -55,7 +52,7 @@ public class Character {
     //MODIFIES: this (health)
     //EFFECTS: health raises or lowers depending on num given,
     //         lowest possible health is 0, highest is 100
-    public void healOrDamage(int num) {
+    public void gainLoseHealth(int num) {
         if (health + num <= 0) {
             health = 0;
         } else if (health + num >= 100) {

@@ -22,15 +22,14 @@ public class GameApp {
     public GameApp() {
         inventory = new Inventory();
         scanner = new Scanner(System.in);
-        input = "";
         cont = true;
 
         runApp();
     }
 
     //MODIFIES: this
-    //EFFECTS: runs entire game -> this is the basic structure (inspired by the tellerApp example)
-    //         - while loop will keep game going if user doesn't quit and doesn't die
+    //EFFECTS: runs entire game -> this is the basic structure (influenced by the tellerApp example)
+    //         - while loop will keep game going if user doesn't quit and is still alive
     public void runApp() {
         intro();
         introCharacter();
@@ -49,10 +48,10 @@ public class GameApp {
     }
 
     //MODIFIES: this
-    //EFFECTS: does a step -> involves showing menu for user, and user chooses what to do next
+    //EFFECTS: does a step -> involves showing menu for user, and user chooses what they to do next
     //         - S -> will display current status
     //         - I -> user uses inventory
-    //         - Q -> sets cont to false -> user quits and game ends
+    //         - Q -> sets cont to false (-> user quits and game ends)
     //         - N -> user chooses to change name
     //         - C -> user chooses to continue on journey -> will lead to obstacle
     public void doStep() {
@@ -79,10 +78,11 @@ public class GameApp {
     }
 
     //MODIFIES: this
-    //EFFECTS: a new obstacle is instantiated for user to do. user chooses an option regarding the obstacle,
+    //EFFECTS: a new obstacle is instantiated for user to do, and gets diplayed.
+    //         user chooses an option regarding the obstacle,
     //         and effects are applies to user stats.
     //         At random after the obstacle, a chest will appear, where user will be able to choose an item
-    //         to add to inventory
+    //         to add to inventory. Then, current status will be printed
     public void doObstacle() {
         obs = new Obstacle();
         System.out.println("You continue on your journey.");
@@ -95,10 +95,10 @@ public class GameApp {
         }
         obs.setChosenOption(input);
         System.out.println(obs.getResult() + "\n");
-        user.healOrDamage(obs.getChangeInHealth());
+        user.gainLoseHealth(obs.getChangeInHealth());
         user.gainLoseProgress(obs.getChangeInProgress());
         Random r = new Random();
-        int ran = r.nextInt(2);   
+        int ran = r.nextInt(2);
         if (ran == 1) {
             getChest();
         }
@@ -111,24 +111,43 @@ public class GameApp {
     //         and user can pick up to 1 to add to inventory
     public void getChest() {
         chest = new Chest();
-        System.out.println("You got a chest! Items in chest:\n" + chest.getAllItemNames());
-        System.out.println("Please enter 1 or 2 to choose an item to pick up. Or -1 if you do not want an item.");
+        printChestIntro();
         input = scanner.next();
         while (!input.equals("1") && !input.equals("2") && !input.equals("-1")) {
             System.out.println("You did not enter a viable option. Please enter 1, 2, or -1.");
             input = scanner.next();
         }
         if (input.equals("-1")) {
-            System.out.println("You did not pick up an item. The chest looks at you glumly and walks away.");
+            System.out.println("You did not pick up an item. The chest looks at you glumly and walks away.\n");
         } else {
             if (inventory.isFull()) {
                 System.out.println("Your inventory is full.");
+                String saveInput = input;
                 chooseGetRidOfItem();
+                if (inventory.isFull()) {
+                    System.out.println("You did not pick up an item. The chest looks at you glumly and walks away.\n");
+                } else {
+                    pickFromChestAndDisplayInventory(saveInput);
+                }
             } else {
-                pickUpItemFromChest(input);
-                displayInventory();
+                pickFromChestAndDisplayInventory(input);
             }
         }
+    }
+
+    //REQUIRES: chest to be instantiated
+    //EFFECTS: prints out you got a chest, names of item in chest, and next possible options
+    public void printChestIntro() {
+        System.out.println("You got a chest! Items in chest:\n" + chest.getAllItemNames());
+        System.out.println("Please enter 1 or 2 to choose an item to pick up. Or -1 if you do not want an item.");
+    }
+
+    //REQUIRES: str to be "1" or "2"
+    //MODIFIES: this
+    //EFFECTS: picks up an item from chest and saves it to inventory. then displays new inventory
+    public void pickFromChestAndDisplayInventory(String str) {
+        pickUpItemFromChest(str);
+        displayInventory();
     }
 
     //REQUIRES: string index is equal to "1" or "2"
@@ -212,23 +231,6 @@ public class GameApp {
         }
     }
 
-//    public void useInventory() {
-//        if (inventory.isEmpty()) {
-//            System.out.println("Inventory is currently empty.");
-//            System.out.println();
-//        } else {
-//            System.out.println("Inventory: " + inventory.getAllItemNames());
-//            System.out.println("Please enter 1, 2, or 3 to use item. Or -1 to go back to main menu.");
-//            input = scanner.next();
-//            if (!input.equals("-1") && !input.equals("1") && !input.equals("2") && !input.equals("3")) {
-//                input = check3Choice(input);
-//            }
-//            if (!input.equals("-1")) {
-//                useItemAt(input);
-//            }
-//        }
-//    }
-
     //EFFECTS: checks if given string is -1, 1, 2, or 3. if it is not, then will keep asking user
     //         to enter different numbers until it is -1, 1, 2, or 3, and will return the user's input
     private String check3Choice(String choice) {
@@ -251,7 +253,7 @@ public class GameApp {
         Item chosenItem = inventory.getItemAtIndex(index);
         System.out.println("You use " + chosenItem.getName().toLowerCase() + ".");
         user.gainLoseProgress(chosenItem.getChangeInProgress());
-        user.healOrDamage(chosenItem.getChangeInHealth());
+        user.gainLoseHealth(chosenItem.getChangeInHealth());
         System.out.println("Item gives " + chosenItem.getChangeInHealth() + "HP");
         System.out.println("Item gives " + chosenItem.getChangeInProgress() + "progress");
         System.out.println();
@@ -305,7 +307,7 @@ public class GameApp {
 
     //EFFECTS: prints out the introduction to the game
     public void intro() {
-        System.out.println("Welcome to The Forest of Lore!");
+        System.out.println("Welcome to The Forest of NAME TO BE DETERMINED!");
         System.out.println("You are surrounded by trees, and don't know the way out.");
         System.out.println("Your status is currently at 100% health, and 0% progress.");
         System.out.println("Inventory is currently empty. Max items it can hold is 3.");

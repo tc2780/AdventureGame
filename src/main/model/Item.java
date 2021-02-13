@@ -18,7 +18,7 @@ public class Item {
         changeInProgress = 0;
         Random r = new Random();
         num = r.nextInt(5) + 1; //returns num in range [1, 5]
-        setUpItem(); //sets up item
+        setUpItem();                   //sets up item
     }
 
     //constructor for testing purposes
@@ -50,9 +50,9 @@ public class Item {
     }
 
     //MODIFIES: this
-    //EFFECTS: sets up item according to random num assigned in constructor,
+    //EFFECTS: sets up item according to (random) num assigned in constructor,
     //         - currently, 5 possible items, each which modifies
-    //           changeInHealth and changeInProgress as needed
+    //           changeInHealth, changeInProgress and name as needed
     public void setUpItem() {
 
         if (num == 1) {
@@ -73,24 +73,24 @@ public class Item {
         }
     }
 
-    //methods below to help shorten setUpItem
+    //methods below to (mostly) help shorten setUpItem
 
     //MODIFIES: this
-    // EFFECTS: the changes that happen when int is 1, sets fields to match item
+    // EFFECTS: the changes that happen when int is 1, sets fields to match item's effects
     private void changesForA() {
         changeInHealth = 20;
         changeInProgress = -20;
     }
 
     //MODIFIES: this
-    // EFFECTS: the changes that happen when int is 1, sets fields to match item
+    // EFFECTS: the changes that happen when int is 1, sets fields to match item's effects
     private void changesForB() {
         changeInProgress = 20;
         changeInHealth = -10;
     }
 
     //MODIFIES: this
-    // EFFECTS: the changes that happen when int is 1, sets fields to match item
+    // EFFECTS: the changes that happen when int is 1, sets fields to match item's effects
     private void changesForD() {
         changeInProgress = -10;
         changeInHealth = 20;

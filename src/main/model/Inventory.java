@@ -2,10 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
-//represents an inventory that can hold items
+//represents an inventory that can hold items -> an array list of items
 public class Inventory {
 
-    private static int MAX_INVENTORY_SPACE = 3;      //max inventory space
+    private static final int MAX_INVENTORY_SPACE = 3;      //max inventory space
     private ArrayList<Item> items;                   //arraylist of items
 
     //constructs a new inventory (arraylist of items)
@@ -51,7 +51,7 @@ public class Inventory {
     //MODIFIES: this
     //EFFECTS: return Item in items with given name, and removes from
     //         inventory
-    public Item getItem(String name) throws IllegalArgumentException {
+    public Item getItem(String name) {
         int i = 0;
         for (Item o : items) {
             if (o.getName().equals(name)) {
@@ -67,7 +67,7 @@ public class Inventory {
         return x;
     }
 
-    //REQUIRES: there must be an item at the index
+    //REQUIRES: there must be an item at the index of i - 1
     //MODIFIES: this
     //EFFECTS: return Item in items with given name, and removes from
     //         inventory
