@@ -68,6 +68,8 @@ public class GameApp {
         } else if (input.equals("I")) {
             useInventory();
         } else if (input.equals("Q")) {
+            System.out.println("You give up on your journey and decide "
+                    + "to live out the rest of your days in the forest.");
             cont = false;
         } else if (input.equals("N")) {
             changeName();
@@ -194,7 +196,7 @@ public class GameApp {
     //         and if it exists, will return the index of that existing item
     public int checkInIndexOfInventory(int index) {
         while (index > inventory.length()) {
-            System.out.println("That does not correlate to a filled space in the inventory."
+            System.out.println("That does not correspond to a filled space in the inventory."
                     + " Please enter a valid number.");
             input = scanner.next();
             input = check3Choice(input);
@@ -254,8 +256,8 @@ public class GameApp {
         System.out.println("You use " + chosenItem.getName().toLowerCase() + ".");
         user.gainLoseProgress(chosenItem.getChangeInProgress());
         user.gainLoseHealth(chosenItem.getChangeInHealth());
-        System.out.println("Item gives " + chosenItem.getChangeInHealth() + "HP");
-        System.out.println("Item gives " + chosenItem.getChangeInProgress() + "progress");
+        System.out.println("Item gives " + chosenItem.getChangeInHealth() + "HP and "
+                + chosenItem.getChangeInProgress() + " progress.");
         System.out.println();
         System.out.println("New Status:");
         displayStatus();
@@ -309,10 +311,10 @@ public class GameApp {
     public void intro() {
         System.out.println("Welcome to The Forest of NAME TO BE DETERMINED!");
         System.out.println("You are surrounded by trees, and don't know the way out.");
-        System.out.println("Your status is currently at 100% health, and 0% progress.");
-        System.out.println("Inventory is currently empty. Max items it can hold is 3.");
-        System.out.println("You can use items to either gain/lose progress/health. "
-                + "However, specific effects of each item are unknown");
+        System.out.println("Your status is currently at 100HP, and 0% progress.");
+        System.out.println("Inventory is currently at 0/3 items.");
+        System.out.println("Items will be able to raise or lower status bars. "
+                + "However, specific effects of each item are unknown to you.");
         System.out.println("To make it out of the forest, try to get"
                 + " progress to 100% by choosing the correct option in each scenario.");
         System.out.println("If health ever hits 0, you die and the game is over.");
@@ -327,7 +329,7 @@ public class GameApp {
         user = new Character(scanner.next());
 
         System.out.println("Hi " + user.getName() + "! What a great name.");
-        System.out.println("With your new name in mind, you start on your journey.");
+        System.out.println("After making sure everything is in order, you start on your journey.");
         System.out.println();
     }
 

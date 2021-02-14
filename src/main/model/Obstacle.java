@@ -21,12 +21,13 @@ public class Obstacle {
         Random r = new Random();
         obs = r.nextInt(5) + 1; //returns int btwn [1, 5]
         chosenOption = "Z";            //default option set to z, which is not a-c
-        changeInHealth = 0;
+        changeInHealth = 0;            //init to 0 because some obstacles don't change health
         changeInProgress = 0;
         result = "";
     }
 
-    //constructor mostly for testing purposes, 1 <= n <= 5
+    //REQUIRES: 1<= n<= 5
+    //EFFECTS: constructor mostly for testing purposes, 1 <= n <= 5
     public Obstacle(int n) {
         obs = n;
         chosenOption = "Z";
@@ -154,7 +155,7 @@ public class Obstacle {
             return "The panda turns out to be ticklish. Make 20 progress, gain 30 HP.";
         } else {
             changeInProgress = 10;
-            return "You stare into it's eyes. The panda wins and seems happy about it. Make 10 progress.";
+            return "You stare into its eyes. The panda wins and seems happy about it. Make 10 progress.";
         }
     }
 

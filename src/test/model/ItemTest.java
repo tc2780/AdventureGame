@@ -32,6 +32,7 @@ public class ItemTest {
         assertEquals(20, d.getChangeInHealth());
         assertEquals(-30, e.getChangeInHealth());
 
+        //test random case
         int x;
         switch (random.getNum()) {
             case 1:
@@ -52,8 +53,7 @@ public class ItemTest {
             default: x = 0;
 
         }
-
-        System.out.println(random.getNum());
+//        System.out.println(random.getNum());
         assertEquals(x, random.getChangeInHealth());
     }
 
@@ -65,6 +65,7 @@ public class ItemTest {
         assertEquals(-10, d.getChangeInProgress());
         assertEquals(0, e.getChangeInProgress());
 
+        //test random case
         int x;
         switch (random.getNum()) {
             case 1:
@@ -84,7 +85,6 @@ public class ItemTest {
                 break;
             default: x = 0;
         }
-
         assertEquals(x, random.getChangeInProgress());
     }
 
@@ -96,6 +96,7 @@ public class ItemTest {
         assertEquals("A book that looks like it's been dipped in mud and dried under the sun", d.getName());
         assertEquals("A ladybug. An actual live animal", e.getName());
 
+        //test random case
         String str;
         switch (random.getNum()) {
             case 1:

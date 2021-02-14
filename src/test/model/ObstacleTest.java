@@ -45,6 +45,7 @@ public class ObstacleTest { //15 possible scenarios (listed below)
         setUpChosenOptions();
     }
 
+    //set up all 15 possible scenarios to make sure every possibility is tested
     public void setUpChosenOptions() {
         a.setChosenOption("A");
         b.setChosenOption("B");
@@ -96,7 +97,7 @@ public class ObstacleTest { //15 possible scenarios (listed below)
     }
 
     @Test
-    public void testChangeInProgressRandom() {
+    public void testRandomChangeInProgress() {
         int x = 0;
         switch (ran.getNum()) {
             case 1:
@@ -262,7 +263,7 @@ public class ObstacleTest { //15 possible scenarios (listed below)
 
         assertEquals("He spills the water. Now there's an angry wet panda after you. Lose 10 progress and 20HP", d.getResult());
         assertEquals("The panda turns out to be ticklish. Make 20 progress, gain 30 HP.", e.setUpResult());
-        assertEquals("You stare into it's eyes. The panda wins and seems happy about it. Make 10 progress.", f.getResult());
+        assertEquals("You stare into its eyes. The panda wins and seems happy about it. Make 10 progress.", f.getResult());
 
         assertEquals("Turns out it's actually a really good camouflaging chameleon."
                 + " And he is angry you disturbed him. Lose 10 progress and 30 HP.", g.getResult());

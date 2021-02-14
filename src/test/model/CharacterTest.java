@@ -28,7 +28,7 @@ class CharacterTest {
     }
 
     @Test
-    public void setHealth() {
+    public void testSetHealth() {
         assertEquals(100, test.getHealth());
         test.setHealth(50);
         assertEquals(50, test.getHealth());

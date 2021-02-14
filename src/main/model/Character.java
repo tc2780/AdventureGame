@@ -1,6 +1,5 @@
 package model;
 
-
 // Represents a character, with a name, progress and health
 public class Character {
     private String name;  //characters name
