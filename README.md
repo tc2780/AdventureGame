@@ -30,7 +30,7 @@ audience is anyone who would like to take some time off and play a small game th
 feeling better than before.
 
 ## User stories:
-- As a user, I want to be able to add items found in chests to my inventory
+- As a user, I want to be able to add items found in chests to my inventory (add multiple X's to Y)
 - As a user, I want to be able to name my character, and be able to change their name during the game
 - As a user, I want to be able to view my current progress and health
 - As a user, I want to be able to view my inventory, and use/get rid of items inside of it
