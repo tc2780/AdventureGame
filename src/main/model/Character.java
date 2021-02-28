@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a character, with a name, progress and health
-public class Character {
+public class Character implements Writable {
     private String name;  //characters name
     private int progress; //current progress of character -> [0, 100]
     private int health;   //[0, 100], once 0, can not raise cause death
@@ -12,6 +15,12 @@ public class Character {
         this.name = name;
         progress = 0;
         health = 100;
+    }
+
+    public Character(String name, int health, int progress) {
+        this.name = name;
+        this.progress = progress;
+        this.health = health;
     }
 
     //EFFECTS: returns characters name
@@ -81,4 +90,13 @@ public class Character {
         }
         return true;
     }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("progress", progress);
+        json.put("health", health);
+        return json;
+    }
+
 }

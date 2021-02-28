@@ -2,12 +2,20 @@ package ui;
 
 import model.*;
 import model.Character;
+import org.json.JSONObject;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+import persistence.Writable;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
 //represents the game being played
-public class GameApp {
+public class GameApp implements Writable {
+
+    private static final String JSON_STORE = "./data/gameApp.json";
 
     private Character user;      //the user, has a name, health and progress bar
     private Inventory inventory; //the current inventory
@@ -16,15 +24,41 @@ public class GameApp {
     private boolean cont;        //true if user continues to play
     private Obstacle obs;        //declaration for each obstacle, instantiated each play to ensure diff scenarios
     private Chest chest;         //declaration of chest, instantiated each time user gets chest to ensure new items
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+
+
 
     //EFFECTS: instantiates inventory and scanner. input set to default "". cont is true at this point->
     //         will proceed to run app
-    public GameApp() {
+    public GameApp() throws FileNotFoundException {
         inventory = new Inventory();
         scanner = new Scanner(System.in);
         cont = true;
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
 
         runApp();
+    }
+
+//    public GameApp(Character user, Inventory inventory) throws FileNotFoundException {
+//        this.inventory = inventory;
+//        this.user = user;
+//        scanner = new Scanner(System.in);
+//        cont = true;
+//        jsonReader = new JsonReader(JSON_STORE);
+//        jsonWriter = new JsonWriter(JSON_STORE);
+//
+//        runApp();
+//    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public Character getCharacter() {
+        return user;
     }
 
     //MODIFIES: this
@@ -33,9 +67,9 @@ public class GameApp {
     public void runApp() {
         intro();
         introCharacter();
-        doStep();
+        getCommand();
         while (cont && user.stillAlive()) {
-            doStep();
+            getCommand();
             if (user.getProgress() == 100) {
                 winMessage();
                 cont = false;
@@ -54,14 +88,18 @@ public class GameApp {
     //         - Q -> sets cont to false (-> user quits and game ends)
     //         - N -> user chooses to change name
     //         - C -> user chooses to continue on journey -> will lead to obstacle
-    public void doStep() {
+    public void getCommand() {
         displayMainMenu();
         input = scanner.next().toUpperCase();
         while (!(input.equals("S") || input.equals("I") || input.equals(
-                "Q") || input.equals("C") || input.equals("N"))) {
-            System.out.println("Invalid command. Please enter q, c, s, n, or i:");
+                "Q") || input.equals("C") || input.equals("N") || input.equals("L") || input.equals("P"))) {
+            System.out.println("Invalid command. Please enter q, c, s, n, p, l or i:");
             input = scanner.next().toUpperCase();
         }
+        doNextStep();
+    }
+
+    public void doNextStep() {
         if (input.equals("S")) {
             System.out.println("Current Status:");
             displayStatus();
@@ -73,11 +111,44 @@ public class GameApp {
             cont = false;
         } else if (input.equals("N")) {
             changeName();
+        } else if (input.equals("P")) {
+            saveGameApp();
+        } else if (input.equals("L")) {
+            loadGameApp();
         } else {
             doObstacle();
             cont = true;
         }
     }
+
+//    public void doStep() {
+//        displayMainMenu();
+//        input = scanner.next().toUpperCase();
+//        while (!(input.equals("S") || input.equals("I") || input.equals(
+//                "Q") || input.equals("C") || input.equals("N") || input.equals("L") || input.equals("P"))) {
+//            System.out.println("Invalid command. Please enter q, c, s, n, p, l or i:");
+//            input = scanner.next().toUpperCase();
+//        }
+//        if (input.equals("S")) {
+//            System.out.println("Current Status:");
+//            displayStatus();
+//        } else if (input.equals("I")) {
+//            useInventory();
+//        } else if (input.equals("Q")) {
+//            System.out.println("You give up on your journey and decide "
+//                    + "to live out the rest of your days in the forest.");
+//            cont = false;
+//        } else if (input.equals("N")) {
+//            changeName();
+//        } else if (input.equals("P")) {
+//            saveGameApp();
+//        } else if (input.equals("L")) {
+//            loadGameApp();
+//        } else {
+//            doObstacle();
+//            cont = true;
+//        }
+//    }
 
     //MODIFIES: this
     //EFFECTS: a new obstacle is instantiated for user to do, and gets diplayed.
@@ -158,7 +229,7 @@ public class GameApp {
     //         based on string, will return item in chest at given index
     public void pickUpItemFromChest(String index) {
         int choice = getIndexOfString(index);
-        Item chosen = chest.getItemAtIndex(choice);
+        Item chosen = chest.getItemAtSpot(choice);
         System.out.println("You picked up " + chosen.getName().toLowerCase());
         inventory.addItem(chosen);
     }
@@ -182,7 +253,7 @@ public class GameApp {
             } else {
                 int index = getIndexOfString(input);
                 index = checkInIndexOfInventory(index);
-                Item getRidOf = inventory.getItemAtIndex(index);
+                Item getRidOf = inventory.getItemAtSpot(index);
                 System.out.println("Getting rid of " + getRidOf.getName().toLowerCase());
                 displayInventory();
             }
@@ -252,7 +323,7 @@ public class GameApp {
     public void useItemAt(String choice) {
         int index = getIndexOfString(choice);
         index = checkInIndexOfInventory(index);
-        Item chosenItem = inventory.getItemAtIndex(index);
+        Item chosenItem = inventory.getItemAtSpot(index);
         System.out.println("You use " + chosenItem.getName().toLowerCase() + ".");
         user.gainLoseProgress(chosenItem.getChangeInProgress());
         user.gainLoseHealth(chosenItem.getChangeInHealth());
@@ -304,7 +375,8 @@ public class GameApp {
     //EFFECTS: prints out the main menu
     public void displayMainMenu() {
         System.out.println("Main Menu: (please enter a letter)");
-        System.out.println("- Status(s)\n- Inventory(i)\n- Continue on journey(c)\n- Change name(n) \n- Quit(q)");
+        System.out.println("- Status(s)\n- Inventory(i)\n- Continue on journey(c)\n- Change name(n) \n- Quit(q)"
+                + "\n- Load saved progress(l)\n- Save progress(p)");
     }
 
     //EFFECTS: prints out the introduction to the game
@@ -352,5 +424,37 @@ public class GameApp {
     public void endMessage() {
         System.out.println("Thanks for playing!\nEnding stats: ");
         displayStatus();
+    }
+
+    private void saveGameApp() {
+        try {
+            GameAppData g = new GameAppData(user, inventory);
+            jsonWriter.open();
+            jsonWriter.write(g);
+            jsonWriter.close();
+            System.out.println("Saved game progress to " + JSON_STORE + "\n");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    private void loadGameApp() {
+        try {
+            GameAppData data = jsonReader.read();
+            user = data.getUser();
+            inventory = data.getInventory();
+            System.out.println("Loaded saved progress from" + JSON_STORE + "\n");
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        GameAppData g = new GameAppData(user, inventory);
+        JSONObject jsonObject = g.toJson();
+
+        return jsonObject;
     }
 }

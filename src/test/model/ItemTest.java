@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -114,5 +115,11 @@ public class ItemTest {
             default: str = "A ladybug. An actual live animal";
         }
         assertEquals(str, random.getName());
+    }
+
+    @Test
+    public void testToJson() {
+        JSONObject jTest = a.toJson();
+        assertEquals(a.getNum(), jTest.get("item num"));
     }
 }

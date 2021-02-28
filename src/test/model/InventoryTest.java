@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -65,32 +67,32 @@ public class InventoryTest {
     @Test
     public void testGetItemAtIndex() {
         test.addItem(a);
-        assertEquals(a, test.getItemAtIndex(1));
+        assertEquals(a, test.getItemAtSpot(1));
         assertEquals(0, test.length());
 
         test.addItem(a);
         test.addItem(b);
-        assertEquals(a, test.getItemAtIndex(1));
+        assertEquals(a, test.getItemAtSpot(1));
         assertEquals(1, test.length());
-        assertEquals(b, test.getItemAtIndex(1));
+        assertEquals(b, test.getItemAtSpot(1));
         assertEquals(0, test.length());
 
         test.addItem(a);
         test.addItem(b);
         test.addItem(c);
-        assertEquals(b, test.getItemAtIndex(2));
+        assertEquals(b, test.getItemAtSpot(2));
         assertEquals("[" + a.getName() + ", " + c.getName() + "]", test.getAllItemNames());
     }
 
     @Test
     public void testGetItemAtIndexIllegalParameter() {
         IllegalArgumentException exc = assertThrows(IllegalArgumentException.class,
-                () -> { test.getItemAtIndex(1);}
+                () -> { test.getItemAtSpot(1);}
         );
         assertEquals("no item at this index", exc.getMessage());
 
         IllegalArgumentException exc2 = assertThrows(IllegalArgumentException.class,
-                () -> { test.getItemAtIndex(-1);}
+                () -> { test.getItemAtSpot(-1);}
         );
         assertEquals("no item at this index", exc.getMessage());
     }
@@ -195,5 +197,18 @@ public class InventoryTest {
 
         test.addItem(c);
         assertTrue(test.isFull());
+    }
+
+    @Test
+    public void testToJson() {
+        test.addItem(a);
+        test.addItem(b);
+        JSONArray jTest = test.toJson();
+
+        JSONObject aJson = (JSONObject) jTest.get(0);
+        assertEquals(a.getNum(), aJson.getInt("item num"));
+
+        JSONObject bJson = (JSONObject) jTest.get(1);
+        assertEquals(b.getNum(), bJson.getInt("item num"));
     }
 }

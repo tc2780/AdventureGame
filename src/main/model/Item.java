@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.Random;
 
 //represents an item that has a string name, an int that represents the item, and a
 //     a change in health and progress that represents the effects of the item
-public class Item {
+public class Item implements Writable {
     private String name;            //name of item
     private int changeInHealth;     //item either heals or gives damage
     private int changeInProgress;   //item either raises or lowers progress
@@ -94,5 +97,11 @@ public class Item {
     private void changesForD() {
         changeInProgress = -10;
         changeInHealth = 20;
+    }
+
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("item num", num);
+        return jsonObject;
     }
 }

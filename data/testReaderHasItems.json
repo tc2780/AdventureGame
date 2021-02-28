@@ -1,0 +1,11 @@
+{
+  "inventory": [
+    {"item num": 2},
+    {"item num": 4}
+  ],
+  "user": {
+    "name": "sfsd",
+    "progress": 0,
+    "health": 40
+  }
+}

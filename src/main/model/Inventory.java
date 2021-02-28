@@ -1,5 +1,10 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.awt.image.WritableRenderedImage;
 import java.util.ArrayList;
 
 //represents an inventory that can hold items -> an array list of items
@@ -71,7 +76,7 @@ public class Inventory {
     //MODIFIES: this
     //EFFECTS: return Item in items with given name, and removes from
     //         inventory
-    public Item getItemAtIndex(int i) {
+    public Item getItemAtSpot(int i) {
         i--;
         if (i >= items.size() || i < 0) {
             throw new IllegalArgumentException("no item at this index");
@@ -110,5 +115,16 @@ public class Inventory {
     //EFFECTS: returns true if items is full, false otherwise
     public boolean isFull() {
         return items.size() == MAX_INVENTORY_SPACE;
+    }
+
+
+    public JSONArray toJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item i : items) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
     }
 }
