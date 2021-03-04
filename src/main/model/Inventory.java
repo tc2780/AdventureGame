@@ -117,7 +117,7 @@ public class Inventory {
         return items.size() == MAX_INVENTORY_SPACE;
     }
 
-
+    //EFFECT: returns all items in inventory stored as a JSONArray
     public JSONArray toJson() {
         JSONArray jsonArray = new JSONArray();
 

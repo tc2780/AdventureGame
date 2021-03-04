@@ -7,7 +7,7 @@ import persistence.Writable;
 public class Character implements Writable {
     private String name;  //characters name
     private int progress; //current progress of character -> [0, 100]
-    private int health;   //[0, 100], once 0, can not raise cause death
+    private int health;   //[0, 100], once 0, can not raise 'cause death
 
     //EFFECTS: create new character with given name, base health is 100,
     //         and progress = 0
@@ -17,6 +17,7 @@ public class Character implements Writable {
         health = 100;
     }
 
+    //EFFECTS: creates new character with given name, progress and health
     public Character(String name, int health, int progress) {
         this.name = name;
         this.progress = progress;
@@ -91,6 +92,7 @@ public class Character implements Writable {
         return true;
     }
 
+    //EFFECTS: returns this as a JSONObject
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);

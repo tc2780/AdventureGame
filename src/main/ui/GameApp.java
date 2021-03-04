@@ -13,7 +13,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 //represents the game being played
-public class GameApp implements Writable {
+public class GameApp {
 
     private static final String JSON_STORE = "./data/gameApp.json";
 
@@ -24,10 +24,8 @@ public class GameApp implements Writable {
     private boolean cont;        //true if user continues to play
     private Obstacle obs;        //declaration for each obstacle, instantiated each play to ensure diff scenarios
     private Chest chest;         //declaration of chest, instantiated each time user gets chest to ensure new items
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
-
-
+    private JsonWriter jsonWriter;  //writer to save data to file
+    private JsonReader jsonReader;  //reader to read data from file
 
 
     //EFFECTS: instantiates inventory and scanner. input set to default "". cont is true at this point->
@@ -41,17 +39,6 @@ public class GameApp implements Writable {
 
         runApp();
     }
-
-//    public GameApp(Character user, Inventory inventory) throws FileNotFoundException {
-//        this.inventory = inventory;
-//        this.user = user;
-//        scanner = new Scanner(System.in);
-//        cont = true;
-//        jsonReader = new JsonReader(JSON_STORE);
-//        jsonWriter = new JsonWriter(JSON_STORE);
-//
-//        runApp();
-//    }
 
     public Inventory getInventory() {
         return inventory;
@@ -88,6 +75,8 @@ public class GameApp implements Writable {
     //         - Q -> sets cont to false (-> user quits and game ends)
     //         - N -> user chooses to change name
     //         - C -> user chooses to continue on journey -> will lead to obstacle
+    //         - L -> loads data from saved file
+    //         - P -> saves users status and inventory to file
     public void getCommand() {
         displayMainMenu();
         input = scanner.next().toUpperCase();
@@ -99,6 +88,9 @@ public class GameApp implements Writable {
         doNextStep();
     }
 
+    //REQUIRES: input is a valid input (either S, I, Q, N, C, L, or P)
+    //MODIFIES: this
+    //EFFECTS: does a step based on what input is
     public void doNextStep() {
         if (input.equals("S")) {
             System.out.println("Current Status:");
@@ -426,6 +418,9 @@ public class GameApp implements Writable {
         displayStatus();
     }
 
+
+    //EFFECTS: creates GameAppData based off of this, and saves as JSONObbject to JSON_STORE,
+    //         will throw file not found exception if file with name JSON_STORE not found
     private void saveGameApp() {
         try {
             GameAppData g = new GameAppData(user, inventory);
@@ -438,23 +433,19 @@ public class GameApp implements Writable {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: loads GameAppData from file, modifies user and inventory to match saved stats.
+    //         if file with JSON_STORE name is not found, IOException is thrown
     private void loadGameApp() {
         try {
             GameAppData data = jsonReader.read();
             user = data.getUser();
             inventory = data.getInventory();
             System.out.println("Loaded saved progress from" + JSON_STORE + "\n");
+            System.out.println("New status: ");
+            displayStatus();
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
-    }
-
-
-    @Override
-    public JSONObject toJson() {
-        GameAppData g = new GameAppData(user, inventory);
-        JSONObject jsonObject = g.toJson();
-
-        return jsonObject;
     }
 }

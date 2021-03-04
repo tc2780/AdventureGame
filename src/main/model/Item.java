@@ -24,7 +24,7 @@ public class Item implements Writable {
         setUpItem();                   //sets up item
     }
 
-    //constructor for testing purposes
+    //constructor for testing purposes, and for easy loading of saved item nums
     public Item(int n) {
         changeInHealth = 0;
         changeInProgress = 0;
@@ -32,7 +32,7 @@ public class Item implements Writable {
         setUpItem();
     }
 
-    //EFFECTS: returns scenario number ---> mostly for testing purposes
+    //EFFECTS: returns item number
     public int getNum() {
         return num;
     }
@@ -99,6 +99,7 @@ public class Item implements Writable {
         changeInHealth = 20;
     }
 
+    //EFFECTS: returns item stored as a JSONObject -> by storing its item num
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("item num", num);

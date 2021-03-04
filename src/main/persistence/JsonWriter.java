@@ -11,9 +11,9 @@ import java.io.*;
 //  https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonWriter {
 
-    private PrintWriter writer;
-    private static final int TAB = 4;
-    private String destination;
+    private PrintWriter writer;       //writer for data
+    private static final int TAB = 4; //indent space
+    private String destination;       //file name where data is saved
 
     //EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
@@ -27,18 +27,23 @@ public class JsonWriter {
         writer = new PrintWriter(new File(destination));
     }
 
+    //MODIFIES: this
+    //EFFECTS: writes JSON representation of gameAPpData to file
     public void write(GameAppData gameAppData) {
         JSONObject j = gameAppData.toJson();
         saveToFile(j.toString(TAB));
     }
 
+    //MODIFIES: this
+    //EFFECTS: closes the writer
     public void close() {
         writer.close();
     }
 
+    //MODIFIES: this
+    //EFFECTS: writes string to file
     public void saveToFile(String j) {
         writer.print(j);
     }
-
 
 }
