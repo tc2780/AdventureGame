@@ -12,7 +12,7 @@ import java.io.*;
 public class JsonWriter {
 
     private PrintWriter writer;       //writer for data
-    private static final int TAB = 4; //indent space
+    private static final int TAB = 4; //indent spacer
     private String destination;       //file name where data is saved
 
     //EFFECTS: constructs writer to write to destination file

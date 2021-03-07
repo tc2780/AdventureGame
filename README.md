@@ -34,5 +34,5 @@ feeling better than before.
 - As a user, I want to be able to name my character, and be able to change their name during the game
 - As a user, I want to be able to view my current progress and health
 - As a user, I want to be able to view my inventory, and use/get rid of items inside of it
-- As a user, I want to save my progress (current status bars and inventory) to file
-- As a user, I want to be able to resume the game with saved progress and inventory from file
+- As a user, I want to save my progress (current status bars, inventory and name) to file
+- As a user, I want to be able to resume the game with saved progress bars, inventory and name from file

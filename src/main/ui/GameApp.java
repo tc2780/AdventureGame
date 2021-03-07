@@ -77,6 +77,7 @@ public class GameApp {
     //         - C -> user chooses to continue on journey -> will lead to obstacle
     //         - L -> loads data from saved file
     //         - P -> saves users status and inventory to file
+    //         this method in particular gets a valid command from user before continuing
     public void getCommand() {
         displayMainMenu();
         input = scanner.next().toUpperCase();
@@ -112,35 +113,6 @@ public class GameApp {
             cont = true;
         }
     }
-
-//    public void doStep() {
-//        displayMainMenu();
-//        input = scanner.next().toUpperCase();
-//        while (!(input.equals("S") || input.equals("I") || input.equals(
-//                "Q") || input.equals("C") || input.equals("N") || input.equals("L") || input.equals("P"))) {
-//            System.out.println("Invalid command. Please enter q, c, s, n, p, l or i:");
-//            input = scanner.next().toUpperCase();
-//        }
-//        if (input.equals("S")) {
-//            System.out.println("Current Status:");
-//            displayStatus();
-//        } else if (input.equals("I")) {
-//            useInventory();
-//        } else if (input.equals("Q")) {
-//            System.out.println("You give up on your journey and decide "
-//                    + "to live out the rest of your days in the forest.");
-//            cont = false;
-//        } else if (input.equals("N")) {
-//            changeName();
-//        } else if (input.equals("P")) {
-//            saveGameApp();
-//        } else if (input.equals("L")) {
-//            loadGameApp();
-//        } else {
-//            doObstacle();
-//            cont = true;
-//        }
-//    }
 
     //MODIFIES: this
     //EFFECTS: a new obstacle is instantiated for user to do, and gets diplayed.
@@ -419,7 +391,7 @@ public class GameApp {
     }
 
 
-    //EFFECTS: creates GameAppData based off of this, and saves as JSONObbject to JSON_STORE,
+    //EFFECTS: creates GameAppData (user and inventory) based off of this, and saves as JSONObbject to JSON_STORE,
     //         will throw file not found exception if file with name JSON_STORE not found
     private void saveGameApp() {
         try {
