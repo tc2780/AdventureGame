@@ -1,11 +1,8 @@
 {
-    "inventory": [
-        {"item num": 2},
-        {"item num": 1}
-    ],
+    "inventory": [{"item num": 5}],
     "user": {
-        "name": "agaf",
-        "progress": 40,
-        "health": 30
+        "name": "jjj",
+        "progress": 0,
+        "health": 100
     }
 }

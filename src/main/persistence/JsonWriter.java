@@ -2,7 +2,6 @@ package persistence;
 
 import model.GameAppData;
 import org.json.JSONObject;
-import ui.GameApp;
 
 import java.io.*;
 
