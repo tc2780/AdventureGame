@@ -10,7 +10,7 @@ public class Chest extends Inventory {
         super(new Item(), new Item());
     }
 
-    public Chest(ArrayList<Item> stuff) {
-        super(stuff.get(0), stuff.get(1));
+    public Chest(ArrayList<Item> items) {
+        super(items.get(0), items.get(1));
     }
 }
