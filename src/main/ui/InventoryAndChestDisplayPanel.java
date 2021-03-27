@@ -7,10 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/** Citation for parts of code (especially the loading images from dir):
+ *  https://github.students.cs.ubc.ca/CPSC210/C3-LectureLabStarter
+ */
+// represents the images displayed when an inventory or a chest is in use
 public class InventoryAndChestDisplayPanel extends JPanel {
 
-    private static final int WIDTH = 1000;
-    private static final int HEIGHT = 500;
     private static final int IMAGE_SCALE_FACTOR = 3;
     private ImageIcon item1;
     private ImageIcon item2;
@@ -19,13 +21,14 @@ public class InventoryAndChestDisplayPanel extends JPanel {
     private ImageIcon item5;
     private Inventory inventory;
     private ImageIcon chestImage;
+    private ImageIcon inventoryImage;
 
     private String sep;
-    private int num; //if num = 1, set up as chest image, else as inventory
 
+    //EFFECTS: creates this with the appropriate images based off the inventory and what should be displayed (num)
+    //         if num is 1, a chest is being displayed, else an inventory is being displayed
     public InventoryAndChestDisplayPanel(Inventory inventory, int num) {
         this.inventory = inventory;
-        this.num = num;
         sep = System.getProperty("file.separator");
         setLayout(new BorderLayout());
 //        setLayout(new GridBagLayout()); //TODO: maybe make the layout better after
@@ -34,8 +37,8 @@ public class InventoryAndChestDisplayPanel extends JPanel {
             JLabel chestImg = new JLabel(chestImage);
             add(chestImg, BorderLayout.NORTH);
         } else {
-            JLabel inventImg = new JLabel(chestImage);
-            add(inventImg, BorderLayout.NORTH); //TODO: make a inventory image
+            JLabel inventImg = new JLabel(inventoryImage);
+            add(inventImg, BorderLayout.NORTH);
         }
         if (inventory.length() == 1) {
             displayOne();
@@ -45,15 +48,15 @@ public class InventoryAndChestDisplayPanel extends JPanel {
             displayThree();
         }
         validate();
-//        setMaximumSize(new Dimension(1000, 500));
     }
 
+    //EFFECTS: creates this with the appropriate images based off the list of items and what should be displayed (num)
+    //         if num is 1, a chest is being displayed, else an inventory is being displayed
     public InventoryAndChestDisplayPanel(ArrayList<Item> stuff, int num) {
         this.inventory = new Inventory();
         for (int i = 0; i < stuff.size(); i++) {
             inventory.addItem(stuff.get(i));
         }
-        this.num = num;
         sep = System.getProperty("file.separator");
         setLayout(new BorderLayout());
 //        setLayout(new GridBagLayout()); //TODO: maybe make the layout better after
@@ -63,7 +66,7 @@ public class InventoryAndChestDisplayPanel extends JPanel {
             add(chestImg, BorderLayout.NORTH);
         } else {
             JLabel inventImg = new JLabel(chestImage);
-            add(inventImg, BorderLayout.NORTH); //TODO: make a inventory image
+            add(inventImg, BorderLayout.NORTH);
         }
         if (inventory.length() == 1) {
             displayOne();
@@ -75,6 +78,8 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         validate();
     }
 
+    //MODIFIES: this
+    //EFFECTS: displays the one item in the inventory
     private void displayOne() {
         Item i = inventory.getItemAtSpot(1);
         JLabel img = findImage(i.getNum());
@@ -82,6 +87,8 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         add(img, BorderLayout.CENTER);
     }
 
+    //MODIFIES: this
+    //EFFECTS: displays the 2 items in the inventory
     private void displayTwo() {
         Item one = inventory.getItemAtSpot(1);
         Item two = inventory.getItemAtSpot(1);
@@ -93,6 +100,8 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         add(secItem, BorderLayout.EAST);
     }
 
+    //MODIFIES: this
+    //EFFECTS: displays the 3 items in the inventory
     private void displayThree() {
         Item one = inventory.getItemAtSpot(1);
         Item two = inventory.getItemAtSpot(1);
@@ -107,6 +116,7 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         add(thirdItem, BorderLayout.EAST);
     }
 
+    //EFFECTS: returns a new jLabel based off of what item is needed
     private JLabel findImage(int i) {
         if (i == 1) {
             return new JLabel(item1);
@@ -121,19 +131,23 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the item images
     private void setUpItemImages() {
         item1 = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "1kiwi.png");
+                + "data" + sep + "Item Images" + sep + "1kiwi.png");
         item2 = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "2waterbottle.png");
+                + "data" + sep + "Item Images" + sep + "2waterbottle.png");
         item3 = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "3feather.png");
+                + "data" + sep + "Item Images" + sep + "3feather.png");
         item4 = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "4book.png");
+                + "data" + sep + "Item Images" + sep + "4book.png");
         item5 = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "5ladybug.png");
-        chestImage = new ImageIcon (System.getProperty("user.dir") + sep
-        + "data" + sep + "chest.png");
+                + "data" + sep + "Item Images" + sep + "5ladybug.png");
+        chestImage = new ImageIcon(System.getProperty("user.dir") + sep
+                + "data"  + sep + "chest.png");
+        inventoryImage = new ImageIcon(System.getProperty("user.dir") + sep
+                + "data" + sep + "Item Images" + sep + "inventory.png");
 
         item1 = scaleImage(item1);
         item2 = scaleImage(item2);
@@ -141,10 +155,10 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         item4 = scaleImage(item4);
         item5 = scaleImage(item5);
         chestImage = scaleImage(chestImage, 5);
-
-
+        inventoryImage = scaleImage(inventoryImage, 5);
     }
 
+    //EFFECTS: returns a scaled image, based off of IMAGE_SCALE_FACTOR
     private ImageIcon scaleImage(ImageIcon img) {
         Image scaled = img.getImage();
         scaled = scaled.getScaledInstance(img.getIconWidth() / IMAGE_SCALE_FACTOR,
@@ -152,12 +166,11 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         return new ImageIcon(scaled);
     }
 
+    //EFFECTS: returns a scaled image, based off of the given factor
     private ImageIcon scaleImage(ImageIcon img, int factor) {
         Image scaled = img.getImage();
         scaled = scaled.getScaledInstance(img.getIconWidth() / factor,
                 img.getIconHeight() / factor, Image.SCALE_SMOOTH);
         return new ImageIcon(scaled);
     }
-
-
 }

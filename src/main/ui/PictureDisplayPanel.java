@@ -5,10 +5,12 @@ import model.Obstacle;
 import javax.swing.*;
 import java.awt.*;
 
+/** Citation for parts of code (especially the loading images from dir):
+ *  https://github.students.cs.ubc.ca/CPSC210/C3-LectureLabStarter
+ */
+// represents the main JPanel in GameAppGraphical, displays needed image as a JLabel in the JPanel
 public class PictureDisplayPanel extends JPanel {
 
-    private static final int WIDTH = 1000;
-    private static final int HEIGHT = 600;
     private static final int IMAGE_SCALE_FACTOR = 3;
     private ImageIcon toDisplay;
     private String sep;
@@ -40,6 +42,7 @@ public class PictureDisplayPanel extends JPanel {
     private ImageIcon obs5B;
     private ImageIcon obs5C;
 
+    //EFFECTS: instantiates fields
     public PictureDisplayPanel() {
         sep = System.getProperty("file.separator");
         toDisplay = new ImageIcon(System.getProperty("user.dir") + sep
@@ -51,6 +54,9 @@ public class PictureDisplayPanel extends JPanel {
         setUpImages();
     }
 
+    //MODIFIES: this
+    //EFFECTS: removes the current image from this and adds the new image based
+    //         off the string input
     public void setImage(String str) {
         remove(actualDisplay);
         if (str.equals("intro")) {
@@ -68,6 +74,9 @@ public class PictureDisplayPanel extends JPanel {
         validate();
     }
 
+    //MODIFIES: this
+    //EFFECTS: removes the current image displayed,
+    //         and sets the actualDisplay to the needed obstacle image
     public void setObsImage(Obstacle obs) {
         remove(actualDisplay);
         if (obs.getNum() == 1) {
@@ -84,6 +93,8 @@ public class PictureDisplayPanel extends JPanel {
         add(actualDisplay);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the image based off the obstacles chosenOption
     private void setImageObs1(Obstacle obs) {
         if (obs.getChosenOption().equals("Z")) {
             actualDisplay = new JLabel(obs1Intro);
@@ -96,6 +107,8 @@ public class PictureDisplayPanel extends JPanel {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the image based off the obstacles chosenOption
     private void setImageObs2(Obstacle obs) {
         if (obs.getChosenOption().equals("Z")) {
             actualDisplay = new JLabel(obs2Intro);
@@ -108,6 +121,8 @@ public class PictureDisplayPanel extends JPanel {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the image based off the obstacles chosenOption
     private void setImageObs3(Obstacle obs) {
         if (obs.getChosenOption().equals("Z")) {
             actualDisplay = new JLabel(obs3Intro);
@@ -120,6 +135,8 @@ public class PictureDisplayPanel extends JPanel {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the image based off the obstacles chosenOption
     private void setImageObs4(Obstacle obs) {
         if (obs.getChosenOption().equals("Z")) {
             actualDisplay = new JLabel(obs4Intro);
@@ -132,6 +149,8 @@ public class PictureDisplayPanel extends JPanel {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the image based off the obstacles chosenOption
     private void setImageObs5(Obstacle obs) {
         if (obs.getChosenOption().equals("Z")) {
             actualDisplay = new JLabel(obs5Intro);
@@ -144,6 +163,8 @@ public class PictureDisplayPanel extends JPanel {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: instantiates fields that are images, corresponds to an image in the dir
     private void setUpImages() {
         intro = new ImageIcon(System.getProperty("user.dir") + sep
                 + "data" + sep + "intro.png");
@@ -165,59 +186,65 @@ public class PictureDisplayPanel extends JPanel {
         setUpObstacleImages();
     }
 
+    //MODIFIES: this
+    //EFFECTS: instantiates fields that are images, corresponds to an image in the dir
     private void setUpObstacleImages() {
         obs1Intro = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs1Intro.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs1Intro.png");
         obs1A = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs1A.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs1A.png");
         obs1B = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs1B.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs1B.png");
         obs1C = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs1C.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs1C.png");
 
         obs2Intro = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs2Intro.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs2Intro.png");
         obs2A = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs2A.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs2A.png");
         obs2B = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs2BC.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs2BC.png");
         obs2C = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs2BC.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs2BC.png");
 
         obs3Intro = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs3IntroB.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs3IntroB.png");
         obs3A = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs3A.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs3A.png");
         setUpObstacleImagesPart2();
     }
 
+    //MODIFIES: this
+    //EFFECTS: instantiates fields that are images, corresponds to an image in the dir
     private void setUpObstacleImagesPart2() {
         obs3B = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs3IntroB.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs3IntroB.png");
         obs3C = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs3C.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs3C.png");
 
         obs4Intro = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs4Intro.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs4Intro.png");
         obs4A = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs4A.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs4A.png");
         obs4B = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs4B.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs4B.png");
         obs4C = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs4C.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs4C.png");
 
         obs5Intro = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs5Intro.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs5Intro.png");
         obs5A = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs5A.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs5A.png");
         obs5B = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs5B.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs5B.png");
         obs5C = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data" + sep + "obs5C.png");
+                + "data" + sep + "Obstacle Images" + sep + "obs5C.png");
 
         scaleAllObsImages();
     }
 
+    //MODIFIES: this
+    //EFFECTS: scales all the images by the IMAGE_SCALE_FACTOR
     private void scaleAllObsImages() {
         obs1Intro = scaleImage(obs1Intro);
         obs1A = scaleImage(obs1A);
@@ -245,6 +272,7 @@ public class PictureDisplayPanel extends JPanel {
         obs5C = scaleImage(obs5C);
     }
 
+    //EFFECTS: returns the scaled image, scaled by IMAGE_SCALE_FACTOR
     private ImageIcon scaleImage(ImageIcon img) {
         Image scaled = img.getImage();
         scaled = scaled.getScaledInstance(img.getIconWidth() / IMAGE_SCALE_FACTOR,
