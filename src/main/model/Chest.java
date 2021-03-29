@@ -10,6 +10,8 @@ public class Chest extends Inventory {
         super(new Item(), new Item());
     }
 
+    //REQUIRES: an array list of exactly 2 items
+    //EFFECTS: makes a chest based on array list of items given
     public Chest(ArrayList<Item> items) {
         super(items.get(0), items.get(1));
     }

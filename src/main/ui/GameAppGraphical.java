@@ -47,12 +47,10 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     private JPanel enterNamePanel;
     private JPanel changeNamePanel;
 
-    //EFFECTS: instantiates inventory and scanner. input set to default "". cont is true at this point->
-    //         will proceed to run app
+    //EFFECTS: instantiates various fields and starts the game off
     public GameAppGraphical() throws FileNotFoundException {
         super("Game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        setResizable(false);
 
         inventory = new Inventory();
         jsonReader = new JsonReader(JSON_STORE);
@@ -173,7 +171,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: adds jcomponents relating to a get chest scenario
+    //EFFECTS: adds jComponents relating to a get chest scenario
     private void addGetChestComponentsToScreen() {
         textToDisplay = new JTextArea(obs.getResult() + "\nYou've found a chest! Click open to view items inside.");
         textToDisplay.setEditable(false);
@@ -191,11 +189,11 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: adds jcomponents relating to an accept changes scenario
+    //EFFECTS: adds jComponents relating to an accept changes scenario
     private void addAcceptChangesComponentsToScreen() {
         JPanel temp = new JPanel();
         JButton ok = new JButton("Accept changes");
-        ok.setActionCommand("-1"); //command for displayMain meny, basically go back
+        ok.setActionCommand("-1"); //command for displayMain menu, basically go back
         ok.addActionListener(this);
         temp.add(ok);
         textToDisplay = new JTextArea(obs.getResult() + "\nFortunately these changes will not cause you to die.");
@@ -253,7 +251,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     //EFFECTS: picks up an item from chest and saves it to inventory
     //         if the inventory is full, then can not pick up the item and goes back to main menu
     //         else, goes back to main menu, and displays current inventory
-    public void pickFromChestAndDisplayInventory(int spot) { //TODO: add in if inventory is full option
+    public void pickFromChestAndDisplayInventory(int spot) { //TODO: if time, add in if inventory is full option
         Item chosen = chest.getItemAtSpot(spot);
         if (inventory.isFull()) {
             textToDisplay = new JTextArea("Could not add item to inventory as inventory is currently full.");
@@ -445,7 +443,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         remove(mainMenuPanel);
         remove(pictureDisplayPanel);
         remove(textToDisplay);
-        pictureDisplayPanel.setImage("static img"); //TODO: make a thanks for playing image
+        pictureDisplayPanel.setImage("static img"); //TODO: if time, make a thanks for playing image
         add(pictureDisplayPanel, BorderLayout.NORTH);
         textToDisplay = new JTextArea(getEndMessage());
         textToDisplay.setEditable(false);

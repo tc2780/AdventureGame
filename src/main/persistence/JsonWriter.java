@@ -5,9 +5,9 @@ import org.json.JSONObject;
 
 import java.io.*;
 
+/** citation: code taken and modified from the JasonSerializationDemo,
+    https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git **/
 //represents writer that writes JSON rep of game to file
-// TODO citation: code taken and modified from the JasonSerializationDemo,
-//  https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonWriter {
 
     private PrintWriter writer;       //writer for data
@@ -44,5 +44,4 @@ public class JsonWriter {
     public void saveToFile(String j) {
         writer.print(j);
     }
-
 }

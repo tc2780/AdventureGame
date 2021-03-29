@@ -124,7 +124,6 @@ public class Inventory {
         for (Item i : items) {
             jsonArray.put(i.toJson());
         }
-
         return jsonArray;
     }
 }

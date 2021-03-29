@@ -13,8 +13,8 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
-// TODO citation: code taken and modified from the JasonSerializationDemo,
-//  https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+/** citation: code taken and modified from the JasonSerializationDemo,
+   https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git **/
 //represents a reader that reads gameApp from JSOn data stored in a file
 public class JsonReader {
 
@@ -40,7 +40,6 @@ public class JsonReader {
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         }
-
         return contentBuilder.toString();
     }
 
@@ -80,5 +79,4 @@ public class JsonReader {
         inventory.addItem(new Item(num));
         return inventory;
     }
-
 }
