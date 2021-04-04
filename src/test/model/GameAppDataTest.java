@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class GameAppDataTest {
 
@@ -17,8 +18,16 @@ public class GameAppDataTest {
     public void setUp() {
         user = new Character("Hello", 20, 20);
         stuff = new Inventory();
-        stuff.addItem(new Item(1));
-        stuff.addItem(new Item(2));
+        Item a = new Item();
+        Item b = new Item();
+        try {
+            a = new Item(1);
+            b = new Item(2);
+        } catch (Exception e) {
+            fail("no exceptions should be thrown");
+        }
+        stuff.addItem(a);
+        stuff.addItem(b);
         test = new GameAppData(user, stuff);
     }
 

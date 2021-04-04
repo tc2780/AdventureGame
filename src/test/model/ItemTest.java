@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.NoSuchItemExistsException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,11 +18,15 @@ public class ItemTest {
 
     @BeforeEach
     public void setUp() {
-        a = new Item(1);
-        b = new Item(2);
-        c = new Item(3);
-        d = new Item(4);
-        e = new Item(5);
+        try {
+            a = new Item(1);
+            b = new Item(2);
+            c = new Item(3);
+            d = new Item(4);
+            e = new Item(5);
+        } catch (Exception e) {
+            fail("all of those should pass");
+        }
         random = new Item();
     }
 
@@ -121,5 +126,49 @@ public class ItemTest {
     public void testToJson() {
         JSONObject jTest = a.toJson();
         assertEquals(a.getNum(), jTest.get("item num"));
+    }
+
+    @Test
+    public void testSetUpNoExceptions() {
+        try {
+            Item a = new Item();
+            Item b = new Item(1);
+            Item c = new Item(2);
+            Item d = new Item(3);
+            Item e = new Item(4);
+            Item f = new Item(5);
+        } catch (NoSuchItemExistsException e) {
+            fail("THere should be no exceptions thrown");
+        }
+    }
+
+    @Test
+    public void testSetUpYesException() {
+        try {
+            Item a = new Item(6);
+            fail("should not reach this spot");
+        } catch (NoSuchItemExistsException e) {
+            //exception should be thrown
+        }
+
+        try {
+            Item b = new Item(-1);
+            fail("should not reach this spot");
+        } catch (NoSuchItemExistsException e) {
+            //exception should be thrown
+        }
+        try {
+            Item b = new Item(0);
+            fail("should not reach this spot");
+        } catch (NoSuchItemExistsException e) {
+            //exception should be thrown
+        }
+
+        try {
+            Item c = new Item(88828787);
+            fail("should not reach this spot");
+        } catch (NoSuchItemExistsException e) {
+            //exception should be thrown
+        }
     }
 }

@@ -19,9 +19,10 @@ public class InventoryAndChestDisplayPanel extends JPanel {
     private ImageIcon item3;
     private ImageIcon item4;
     private ImageIcon item5;
-    private Inventory inventory;
     private ImageIcon chestImage;
     private ImageIcon inventoryImage;
+
+    private Inventory inventory;
 
     private String sep;
 
@@ -166,6 +167,7 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         return new ImageIcon(scaled);
     }
 
+    /**https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon**/
     //EFFECTS: returns a scaled image, based off of the given factor
     private ImageIcon scaleImage(ImageIcon img, int factor) {
         Image scaled = img.getImage();

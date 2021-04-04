@@ -22,11 +22,15 @@ public class InventoryTest {
     @BeforeEach
     public void setUp() {
         test = new Inventory();
-        a = new Item(1);
-        b = new Item(2);
-        c = new Item(3);
-        d = new Item(4);
-        e = new Item(5);
+        try {
+            a = new Item(1);
+            b = new Item(2);
+            c = new Item(3);
+            d = new Item(4);
+            e = new Item(5);
+        } catch (Exception e) {
+            fail("no exceptions should be thrown");
+        }
     }
 
     @Test
@@ -85,16 +89,31 @@ public class InventoryTest {
     }
 
     @Test
-    public void testGetItemAtIndexIllegalParameter() {
-        IllegalArgumentException exc = assertThrows(IllegalArgumentException.class,
-                () -> { test.getItemAtSpot(1);}
-        );
-        assertEquals("no item at this index", exc.getMessage());
+    public void testGetItemIndexOutOfBounds() {
+//        IllegalArgumentException exc = assertThrows(IllegalArgumentException.class,
+//                () -> { test.getItemAtSpot(1);}
+//        );
+//        assertEquals("no item at this index", exc.getMessage());
+//
+//        IllegalArgumentException exc2 = assertThrows(IllegalArgumentException.class,
+//                () -> { test.getItemAtSpot(-1);}
+//        );
+//        assertEquals("no item at this index", exc.getMessage());
+        try {
+            test.getItemAtSpot(1);
+            fail("Test should not reach this point");
+        } catch (IndexOutOfBoundsException e) {
+            //should be thrown
+        }
 
-        IllegalArgumentException exc2 = assertThrows(IllegalArgumentException.class,
-                () -> { test.getItemAtSpot(-1);}
-        );
-        assertEquals("no item at this index", exc.getMessage());
+        test.addItem(a);
+        test.addItem(b);
+        try {
+            Item item = test.getItemAtSpot(1);
+            assertEquals(a, item);
+        } catch (IndexOutOfBoundsException e) {
+            fail("the exception should not be thrown");
+        }
     }
 
     @Test
@@ -132,15 +151,15 @@ public class InventoryTest {
         assertEquals(2, test.length());
     }
 
-    @Test
-    public void testGetItemIllegalParameter() {
-        IllegalArgumentException exc = assertThrows(IllegalArgumentException.class,
-                () -> { test.getItem("sdf");}
-        );
-
-        assertEquals("can not pass in", exc.getMessage());
-
-    }
+//    @Test
+//    public void testGetItemIllegalParameter() {
+//        IllegalArgumentException exc = assertThrows(IllegalArgumentException.class,
+//                () -> { test.getItem("sdf");}
+//        );
+//
+//        assertEquals("can not pass in", exc.getMessage());
+//
+//    }
 
     @Test
     public void testGetAllItemNames() {

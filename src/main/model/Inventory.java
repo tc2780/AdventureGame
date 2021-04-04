@@ -52,7 +52,7 @@ public class Inventory {
         return false;
     }
 
-    //REQUIRES: item of given name to be in items
+    //REQUIRES: item with name to be possible to exist, and for item of given name to be in items
     //MODIFIES: this
     //EFFECTS: return Item in items with given name, and removes from
     //         inventory
@@ -64,9 +64,9 @@ public class Inventory {
             }
             i++;
         }
-        if (!this.haveItem(name)) {
-            throw new IllegalArgumentException("can not pass in");
-        }
+//        if (!this.haveItem(name)) {
+//            throw new IllegalArgumentException("can not pass in");
+//        }
         Item x = items.get(i);
         items.remove(i);
         return x;
@@ -76,12 +76,11 @@ public class Inventory {
     //MODIFIES: this
     //EFFECTS: return Item in items with given name, and removes from
     //         inventory
-    public Item getItemAtSpot(int i) {
+    public Item getItemAtSpot(int i) throws IndexOutOfBoundsException {
         i--;
         if (i >= items.size() || i < 0) {
-            throw new IllegalArgumentException("no item at this index");
+            throw new IndexOutOfBoundsException("This index does not exist");
         }
-
         Item item = items.get(i);
         items.remove(item);
         return item;

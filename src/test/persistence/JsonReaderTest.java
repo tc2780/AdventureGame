@@ -1,12 +1,15 @@
 package persistence;
 
+import exceptions.NoSuchItemExistsException;
 import model.GameAppData;
 import model.Inventory;
 import model.Item;
 import org.junit.jupiter.api.Test;
 import model.Character;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,8 +56,16 @@ public class JsonReaderTest {
     public void testReadYesFileHasItems() {
         reader = new JsonReader("./data/testReaderHasItems.json");
         Inventory expectedInventory = new Inventory();
-        expectedInventory.addItem(new Item(2));
-        expectedInventory.addItem(new Item(4));
+        Item a = new Item();
+        Item b = new Item();
+        try {
+            a = new Item(2);
+            b = new Item(4);
+        } catch (Exception e) {
+            fail("exception should not be thrown");
+        }
+        expectedInventory.addItem(a);
+        expectedInventory.addItem(b);
 
         Character expectedUser = new Character("sfsd", 40, 0);
 
@@ -72,6 +83,20 @@ public class JsonReaderTest {
             assertEquals(expectedInventory.getItemAtSpot(1).getNum(), inven.getItemAtSpot(1).getNum());
             assertEquals(expectedInventory.getItemAtSpot(1).getNum(), inven.getItemAtSpot(1).getNum());
 
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    /** code referenced: https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println **/
+    @Test
+    public void testIfItemSavedHasError() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        reader = new JsonReader("./data/testReaderItemException.json");
+        try {
+            GameAppData g = reader.read();
+            assertEquals("An exception was thrown in JsonReader addItem\n", out.toString());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

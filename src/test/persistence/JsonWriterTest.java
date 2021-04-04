@@ -30,7 +30,15 @@ public class JsonWriterTest {
     public void testWriterYesFile() {
         try {
             Character expectedC = new Character("", 100, 0);
-            Inventory expectedI = new Inventory(new Item(1), new Item(2));
+            Item a = new Item();
+            Item b = new Item();
+            try {
+                a = new Item(1);
+                b = new Item(2);
+            } catch (Exception e) {
+                fail("no exceptions should be thrown");
+            }
+            Inventory expectedI = new Inventory(a, b);
             GameAppData data = new GameAppData(expectedC, expectedI);//
             JsonWriter writer = new JsonWriter("./data/testWriterYesData.json");
             writer.open();

@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.NoSuchItemExistsException;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -25,10 +26,17 @@ public class Item implements Writable {
     }
 
     //constructor for testing purposes, and for easy loading of saved item nums
-    public Item(int n) {
+    //EFFECTS: if n is passed in such that n < 1 or n > 5, throws NoSuchItemExistsException, else
+    //         init change in health and progress to be 0 (some items don't change health and/or progress);
+    //         also assigns item a random int between 1-5 which correlates to a specific item;
+    //         setUpItem will set fields to match an items effects
+    public Item(int n) throws NoSuchItemExistsException {
         changeInHealth = 0;
         changeInProgress = 0;
         num = n;
+        if (num < 1 || num > 5) {
+            throw new NoSuchItemExistsException("There does not exist an item with the number" + num);
+        }
         setUpItem();
     }
 
@@ -52,6 +60,7 @@ public class Item implements Writable {
         return name;
     }
 
+    //*****REQUIRES: num is between 1-5*** should be set up now so that no number other than 1-5 can be num
     //MODIFIES: this
     //EFFECTS: sets up item according to (random) num assigned in constructor,
     //         - currently, 5 possible items, each which modifies

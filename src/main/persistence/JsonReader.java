@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.NoSuchItemExistsException;
 import model.GameAppData;
 import model.Inventory;
 import model.Item;
@@ -76,7 +77,13 @@ public class JsonReader {
     //         adds item to inventory, and returns inventory
     private Inventory addItem(JSONObject json, Inventory inventory) {
         int num = json.getInt("item num");
-        inventory.addItem(new Item(num));
+        Item a = new Item();
+        try {
+            a = new Item(num);
+        } catch (NoSuchItemExistsException e) {
+            System.out.println("An exception was thrown in JsonReader addItem");
+        }
+        inventory.addItem(a);
         return inventory;
     }
 }
