@@ -5,8 +5,9 @@ import model.Obstacle;
 import javax.swing.*;
 import java.awt.*;
 
-/** Citation for parts of code (especially the loading images from dir):
- *  https://github.students.cs.ubc.ca/CPSC210/C3-LectureLabStarter
+/**
+ * Citation for parts of code (especially the loading images from dir):
+ * https://github.students.cs.ubc.ca/CPSC210/C3-LectureLabStarter
  */
 // represents the main JPanel in GameAppGraphical, displays needed image as a JLabel in the JPanel
 public class PictureDisplayPanel extends JPanel {

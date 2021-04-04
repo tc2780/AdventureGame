@@ -56,7 +56,8 @@ public class ItemTest {
             case 5:
                 x = -30;
                 break;
-            default: x = 0;
+            default:
+                x = 0;
 
         }
 //        System.out.println(random.getNum());
@@ -89,7 +90,8 @@ public class ItemTest {
             case 5:
                 x = 0;
                 break;
-            default: x = 0;
+            default:
+                x = 0;
         }
         assertEquals(x, random.getChangeInProgress());
     }
@@ -117,7 +119,8 @@ public class ItemTest {
             case 4:
                 str = "A book that looks like it's been dipped in mud and dried under the sun";
                 break;
-            default: str = "A ladybug. An actual live animal";
+            default:
+                str = "A ladybug. An actual live animal";
         }
         assertEquals(str, random.getName());
     }

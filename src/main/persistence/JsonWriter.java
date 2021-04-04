@@ -5,8 +5,10 @@ import org.json.JSONObject;
 
 import java.io.*;
 
-/** citation: code taken and modified from the JasonSerializationDemo,
-    https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git **/
+/**
+ * citation: code taken and modified from the JasonSerializationDemo,
+ * https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+ **/
 //represents writer that writes JSON rep of game to file
 public class JsonWriter {
 

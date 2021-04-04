@@ -7,8 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-/** Citation for parts of code (especially the loading images from dir):
- *  https://github.students.cs.ubc.ca/CPSC210/C3-LectureLabStarter
+/**
+ * Citation for parts of code (especially the loading images from dir):
+ * https://github.students.cs.ubc.ca/CPSC210/C3-LectureLabStarter
  */
 // represents the images displayed when an inventory or a chest is in use
 public class InventoryAndChestDisplayPanel extends JPanel {
@@ -146,7 +147,7 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         item5 = new ImageIcon(System.getProperty("user.dir") + sep
                 + "data" + sep + "Item Images" + sep + "5ladybug.png");
         chestImage = new ImageIcon(System.getProperty("user.dir") + sep
-                + "data"  + sep + "chest.png");
+                + "data" + sep + "chest.png");
         inventoryImage = new ImageIcon(System.getProperty("user.dir") + sep
                 + "data" + sep + "Item Images" + sep + "inventory.png");
 
@@ -167,7 +168,9 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         return new ImageIcon(scaled);
     }
 
-    /**https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon**/
+    /**
+     * https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
+     **/
     //EFFECTS: returns a scaled image, based off of the given factor
     private ImageIcon scaleImage(ImageIcon img, int factor) {
         Image scaled = img.getImage();

@@ -681,7 +681,10 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     }
 
     //code taken from alarm controller UI
-    /** citation: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem */
+
+    /**
+     * citation: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
+     */
     //MODIFIES: this
     //EFFECTS: centers the application on the screen
     private void centreOnScreen() {
@@ -710,6 +713,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     //         - S -> will display current status
     //         - get result of obs -> does the obs result
     //         - else, user quits and will display end msg
+
     /**
      * Invoked when an action occurs.
      */

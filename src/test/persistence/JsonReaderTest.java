@@ -88,7 +88,9 @@ public class JsonReaderTest {
         }
     }
 
-    /** code referenced: https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println **/
+    /**
+     * code referenced: https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println
+     **/
     @Test
     public void testIfItemSavedHasError() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();

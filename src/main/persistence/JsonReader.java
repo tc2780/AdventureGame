@@ -14,8 +14,10 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
-/** citation: code taken and modified from the JasonSerializationDemo,
-   https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git **/
+/**
+ * citation: code taken and modified from the JasonSerializationDemo,
+ * https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+ **/
 //represents a reader that reads gameApp from JSOn data stored in a file
 public class JsonReader {
 
