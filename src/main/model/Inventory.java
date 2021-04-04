@@ -64,9 +64,9 @@ public class Inventory {
             }
             i++;
         }
-//        if (!this.haveItem(name)) {
-//            throw new IllegalArgumentException("can not pass in");
-//        }
+        if (!this.haveItem(name)) {
+            throw new IllegalArgumentException("can not pass in");
+        }
         Item x = items.get(i);
         items.remove(i);
         return x;
