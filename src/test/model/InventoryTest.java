@@ -90,15 +90,6 @@ public class InventoryTest {
 
     @Test
     public void testGetItemIndexOutOfBounds() {
-//        IllegalArgumentException exc = assertThrows(IllegalArgumentException.class,
-//                () -> { test.getItemAtSpot(1);}
-//        );
-//        assertEquals("no item at this index", exc.getMessage());
-//
-//        IllegalArgumentException exc2 = assertThrows(IllegalArgumentException.class,
-//                () -> { test.getItemAtSpot(-1);}
-//        );
-//        assertEquals("no item at this index", exc.getMessage());
         try {
             test.getItemAtSpot(1);
             fail("Test should not reach this point");
@@ -145,7 +136,7 @@ public class InventoryTest {
     }
 
     @Test
-    public void testGetItem() {
+    public void testGetItemNoExceptions() {
         test.addItem(a);
         assertEquals(a, test.getItem(a.getName()));
         assertEquals(0, test.length());

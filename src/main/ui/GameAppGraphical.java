@@ -106,9 +106,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     //         a panel with 3 buttons is shown, and takes the users choice regarding the obstacle
     public void introObstacle() {
         obs = new Obstacle();
-        remove(textToDisplay);
-        remove(pictureDisplayPanel);
-        remove(mainMenuPanel);
+        getContentPane().removeAll();
         String text = "You continue on your journey.\n\n" + obs.lookUpObstacle()
                 + "\n\nWhat will you do?\n" + obs.getOptions();
         textToDisplay = new JTextArea(text, 10, 100);
@@ -127,9 +125,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     //MODIFIES: this
     //EFFECTS: displays an outro specifying changes in stats
     private void doObsOutro() {
-        remove(pictureDisplayPanel);
-        remove(textToDisplay);
-        remove(obstacleChoicePanel);
+        getContentPane().removeAll();
         pictureDisplayPanel.setObsImage(obs);
         user.gainLoseProgress(obs.getChangeInProgress());
         user.gainLoseHealth(obs.getChangeInHealth());
@@ -170,6 +166,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         validate();
     }
 
+    //REQUIRES: content pane is empty
     //MODIFIES: this
     //EFFECTS: adds jComponents relating to a get chest scenario
     private void addGetChestComponentsToScreen() {
@@ -188,6 +185,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         add(temp, BorderLayout.SOUTH);
     }
 
+    //REQUIRES: content pane is empty
     //MODIFIES: this
     //EFFECTS: adds jComponents relating to an accept changes scenario
     private void addAcceptChangesComponentsToScreen() {
@@ -204,6 +202,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         textToDisplay = new JTextArea("Main menu");
     }
 
+    //REQUIRES: content pane is empty
     //MODIFIES: this
     //EFFECTS: adds jComponents relating to a good ending scenario
     private void addGoodEndComponentsToScreen() {
@@ -215,6 +214,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         add(textToDisplay, BorderLayout.CENTER);
     }
 
+    //REQUIRES: content pane is empty
     //MODIFIES: this
     //EFFECTS: adds jComponents relating to a bad ending scenario
     private void addBadEndComponentsToScreen() {
@@ -385,12 +385,12 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     //EFFECTS: displays panels asking what the user wants to change their name to,
     //         and adds the changeNamePanel for user unput
     public void changeName() {
-        remove(textToDisplay);
-        remove(mainMenuPanel);
+        getContentPane().removeAll();
         textToDisplay = new JTextArea("You've chosen to change your current name.\n"
                 + " What would you like to change it to?");
         textToDisplay.setEditable(false);
         makeChangeNamePanel();
+        add(pictureDisplayPanel, BorderLayout.NORTH);
         add(textToDisplay, BorderLayout.CENTER);
         add(changeNamePanel, BorderLayout.SOUTH);
         validate();
@@ -440,9 +440,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     //EFFECTS: removes JComponents, and thanks the user for playing.
     //         the user is not able to move from this state (except to exit the application entirely)
     public void endMessage() {
-        remove(mainMenuPanel);
-        remove(pictureDisplayPanel);
-        remove(textToDisplay);
+        getContentPane().removeAll();
         pictureDisplayPanel.setImage("static img"); //TODO: if time, make a thanks for playing image
         add(pictureDisplayPanel, BorderLayout.NORTH);
         textToDisplay = new JTextArea(getEndMessage());
@@ -489,7 +487,6 @@ public class GameAppGraphical extends JFrame implements ActionListener {
             textToDisplay = new JTextArea("Loaded saved progress from" + JSON_STORE
                     + "\n\nNew status:\n" + getStatusMessage());
         } catch (IOException e) {
-//            System.out.println("Unable to read from file: " + JSON_STORE);
             textToDisplay = new JTextArea("Unable to read from file: " + JSON_STORE);
         }
         textToDisplay.setEditable(false);
@@ -498,7 +495,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: instatntiates the ObstacleChoicePanel, and adds 3 buttons (A, B, C) that
+    //EFFECTS: instantiates the ObstacleChoicePanel, and adds 3 buttons (A, B, C) that
     //         refer to the 3 options user can choose regarding an obstacle
     //         sets the action command for the buttons, and adds this as the action listener
     private void makeObstacleChoicePanel() {
@@ -713,7 +710,6 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     //         - S -> will display current status
     //         - get result of obs -> does the obs result
     //         - else, user quits and will display end msg
-
     /**
      * Invoked when an action occurs.
      */
@@ -737,7 +733,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
             itemUseChoice = 1; //pick up item
             getChest();
         } else {
-            actionPerformedPartTwo(e);
+            actionPerformedPartTwo(e); //continued below cause too long
         }
     }
 
@@ -762,7 +758,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         } else if (e.getActionCommand().equals("N")) {
             changeName();
         } else {
-            actionPerformedPartThree(e);
+            actionPerformedPartThree(e); //continued below cause too long
         }
     }
 

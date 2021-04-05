@@ -31,25 +31,7 @@ public class InventoryAndChestDisplayPanel extends JPanel {
     //         if num is 1, a chest is being displayed, else an inventory is being displayed
     public InventoryAndChestDisplayPanel(Inventory inventory, int num) {
         this.inventory = inventory;
-        sep = System.getProperty("file.separator");
-        setLayout(new BorderLayout());
-//        setLayout(new GridBagLayout()); //TODO: maybe make the layout better after
-        setUpItemImages();
-        if (num == 1) {
-            JLabel chestImg = new JLabel(chestImage);
-            add(chestImg, BorderLayout.NORTH);
-        } else {
-            JLabel inventImg = new JLabel(inventoryImage);
-            add(inventImg, BorderLayout.NORTH);
-        }
-        if (inventory.length() == 1) {
-            displayOne();
-        } else if (inventory.length() == 2) {
-            displayTwo();
-        } else {
-            displayThree();
-        }
-        validate();
+        continueSetUp(num);
     }
 
     //EFFECTS: creates this with the appropriate images based off the list of items and what should be displayed (num)
@@ -59,6 +41,10 @@ public class InventoryAndChestDisplayPanel extends JPanel {
         for (int i = 0; i < stuff.size(); i++) {
             inventory.addItem(stuff.get(i));
         }
+        continueSetUp(num);
+    }
+
+    private void continueSetUp(int num) {
         sep = System.getProperty("file.separator");
         setLayout(new BorderLayout());
 //        setLayout(new GridBagLayout()); //TODO: maybe make the layout better after
@@ -67,7 +53,7 @@ public class InventoryAndChestDisplayPanel extends JPanel {
             JLabel chestImg = new JLabel(chestImage);
             add(chestImg, BorderLayout.NORTH);
         } else {
-            JLabel inventImg = new JLabel(chestImage);
+            JLabel inventImg = new JLabel(inventoryImage);
             add(inventImg, BorderLayout.NORTH);
         }
         if (inventory.length() == 1) {
