@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.NoSuchItemExistsException;
 import model.Character;
 import model.GameAppData;
 import model.Inventory;
@@ -56,6 +57,8 @@ public class JsonWriterTest {
             assertEquals(expectedI.getItemAtSpot(1).getNum(), actualI.getItemAtSpot(1).getNum());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
+        } catch (NoSuchItemExistsException e) {
+            fail("items should exist");
         }
     }
 }

@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.NoSuchItemExistsException;
 import model.*;
 import model.Character;
 import persistence.JsonReader;
@@ -488,6 +489,8 @@ public class GameAppGraphical extends JFrame implements ActionListener {
                     + "\n\nNew status:\n" + getStatusMessage());
         } catch (IOException e) {
             textToDisplay = new JTextArea("Unable to read from file: " + JSON_STORE);
+        } catch (NoSuchItemExistsException e) {
+            textToDisplay = new JTextArea("Tried to add an item with no associated number: " + e.getMessage());
         }
         textToDisplay.setEditable(false);
         add(textToDisplay);

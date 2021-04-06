@@ -30,7 +30,7 @@ public class JsonReader {
 
     //EFFECTS: reads file with name of variable source, and returns as GameAppData,
     //          throws IOException if there's an error while reading data from file
-    public GameAppData read() throws IOException {
+    public GameAppData read() throws IOException, NoSuchItemExistsException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseGameApp(jsonObject);
@@ -47,7 +47,7 @@ public class JsonReader {
     }
 
     //EFFECTS: reads GameAppData from JSONObject, and returns as GameAppData
-    private GameAppData parseGameApp(JSONObject jobject) {
+    private GameAppData parseGameApp(JSONObject jobject) throws NoSuchItemExistsException {
         JSONObject person = jobject.getJSONObject("user");
         JSONArray items = jobject.getJSONArray("inventory");
 
@@ -66,7 +66,7 @@ public class JsonReader {
     //MODIFIES: inventory
     //EFFECTS: reads items stored in JSONArray, adds it to given inventory,
     //         then returns inventory
-    private Inventory addItems(JSONArray items, Inventory inventory) {
+    private Inventory addItems(JSONArray items, Inventory inventory) throws NoSuchItemExistsException {
         for (Object json : items) {
             JSONObject item = (JSONObject) json;
             inventory = addItem(item, inventory);
@@ -77,14 +77,14 @@ public class JsonReader {
     //MODIFIES: inventory
     //EFFECTS: parses item num from JSONObject, initializes item with its item num,
     //         adds item to inventory, and returns inventory
-    private Inventory addItem(JSONObject json, Inventory inventory) {
+    private Inventory addItem(JSONObject json, Inventory inventory) throws NoSuchItemExistsException {
         int num = json.getInt("item num");
-        Item a = new Item();
-        try {
-            a = new Item(num);
-        } catch (NoSuchItemExistsException e) {
-            System.out.println("An exception was thrown in JsonReader addItem");
-        }
+        Item a = new Item(num);
+//        try {
+//            a = new Item(num);
+//        } catch (NoSuchItemExistsException e) {
+//            throw e;
+//        }
         inventory.addItem(a);
         return inventory;
     }

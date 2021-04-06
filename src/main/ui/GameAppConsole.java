@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.NoSuchItemExistsException;
 import model.*;
 import model.Character;
 import org.json.JSONObject;
@@ -418,6 +419,9 @@ public class GameAppConsole {
             displayStatus();
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+        } catch (NoSuchItemExistsException e) {
+            System.out.println("Could not add an item with the associated number: ");
+            System.out.println(e.getMessage());
         }
     }
 }

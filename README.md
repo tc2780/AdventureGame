@@ -41,7 +41,7 @@ Phase 4: Task 2 - I refactored the Item class in the model package so it is robu
     throws a NoSuchItemExistsException if the int passed in does not have an item associated with it
     - tests for it are at the bottom of the ItemTest class
  
- Phase 4: Task 3 - One factoring I would redo is the relationship between Inventory and Chest. Currently, i have Chest extends Inventory,
+ Phase 4: Task 3 - One refactoring I would do is the class relationship between Inventory and Chest. Currently, i have Chest extends Inventory,
  and although it is true that chest shares a lot of the same functionality as inventory, it's not exactly true
  that a chest is considered an inventory. If I were to refactor it, I think I would have a different abstract class (called Storage, maybe),
  that implements the methods that both chest and inventory share and then have both chest and inventory extend that class instead.
