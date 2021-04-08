@@ -273,6 +273,9 @@ public class PictureDisplayPanel extends JPanel {
         obs5C = scaleImage(obs5C);
     }
 
+    /**
+     * https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
+     **/
     //EFFECTS: returns the scaled image, scaled by IMAGE_SCALE_FACTOR
     private ImageIcon scaleImage(ImageIcon img) {
         Image scaled = img.getImage();

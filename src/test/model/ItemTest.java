@@ -60,7 +60,6 @@ public class ItemTest {
                 x = 0;
 
         }
-//        System.out.println(random.getNum());
         assertEquals(x, random.getChangeInHealth());
     }
 

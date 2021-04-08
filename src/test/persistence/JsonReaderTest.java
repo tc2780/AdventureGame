@@ -26,6 +26,7 @@ public class JsonReaderTest {
 
         try {
             GameAppData g = reader.read();
+            fail("should not reach this spot");
         } catch (IOException e) {
             //nothing because it catches exception
         } catch (NoSuchItemExistsException e) {
@@ -94,17 +95,13 @@ public class JsonReaderTest {
         }
     }
 
-    /**
-     * code referenced: https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println
-     **/
+
     @Test
     public void testIfItemSavedHasError() {
-//        ByteArrayOutputStream out = new ByteArrayOutputStream();
-//        System.setOut(new PrintStream(out));
         reader = new JsonReader("./data/testReaderItemException.json");
         try {
             GameAppData g = reader.read();
-//            assertEquals("An exception was thrown in JsonReader addItem\n", out.toString());
+            fail("Should not reach this point");
         } catch (IOException e) {
             fail("Couldn't read from file");
         } catch (NoSuchItemExistsException e) {

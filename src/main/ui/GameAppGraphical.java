@@ -210,6 +210,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         textToDisplay = new JTextArea("Your progress has reached 100%.\nYou've made it out!\nUnfortunately, "
                 + "all you can see are endless hills of sand.\n"
                 + "There is nothing outside the forest.\n\n" + getEndMessage());
+        textToDisplay.setEditable(false);
         pictureDisplayPanel.setImage("good ending");
         add(pictureDisplayPanel, BorderLayout.NORTH);
         add(textToDisplay, BorderLayout.CENTER);
@@ -222,6 +223,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         textToDisplay = new JTextArea("Oh no! Your health has reached 0.\n"
                 + "You succumb to the dangers of the forest and die :(\n\n" + getEndMessage());
         pictureDisplayPanel.setImage("bad ending");
+        textToDisplay.setEditable(false);
         add(pictureDisplayPanel, BorderLayout.NORTH);
         add(textToDisplay, BorderLayout.CENTER);
     }
@@ -282,8 +284,6 @@ public class GameAppGraphical extends JFrame implements ActionListener {
             remove(textToDisplay);
             textToDisplay = new JTextArea("There are currently no items at that spot. Please choose an item you have."
                     + "\n\nInventory:\n" + inventory.getAllItemNames());
-            add(textToDisplay, BorderLayout.CENTER);
-            textToDisplay = new JTextArea("Main menu");
         } else {
             getContentPane().removeAll();
             makeMainMenuPanel();
@@ -294,9 +294,10 @@ public class GameAppGraphical extends JFrame implements ActionListener {
                     + ".\n\nCurrent inventory:\n" + inventory.getAllItemNames();
             textToDisplay = new JTextArea(str);
             add(pictureDisplayPanel, BorderLayout.NORTH);
-            add(textToDisplay, BorderLayout.CENTER);
             add(mainMenuPanel, BorderLayout.SOUTH);
         }
+        textToDisplay.setEditable(false);
+        add(textToDisplay, BorderLayout.CENTER);
         validate();
         textToDisplay = new JTextArea("You have chosen not to get rid of anything.");
     }
@@ -308,6 +309,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         getContentPane().removeAll();
         if (inventory.isEmpty()) {
             textToDisplay = new JTextArea("Inventory is currently empty");
+            textToDisplay.setEditable(false);
             pictureDisplayPanel.setImage("static img");
             makeMainMenuPanel();
 
@@ -319,6 +321,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
             textToDisplay = new JTextArea("Items currently in inventory:\n" + inventory.getAllItemNames());
             inventoryAndChestDisplayPanel = new InventoryAndChestDisplayPanel(inventory.getItems(), 2);
             makeInventoryMenuPanel();
+            textToDisplay.setEditable(false);
 
             add(inventoryAndChestDisplayPanel, BorderLayout.NORTH);
             add(textToDisplay, BorderLayout.CENTER);
@@ -343,6 +346,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         inventoryAndChestDisplayPanel = new InventoryAndChestDisplayPanel(inventory.getItems(), 2);
         makeInventoryChoicePanel();
         textToDisplay = new JTextArea("Please choose an item " + temp + inventory.getAllItemNames());
+        textToDisplay.setEditable(false);
 
         add(inventoryAndChestDisplayPanel, BorderLayout.NORTH);
         add(textToDisplay, BorderLayout.CENTER);
@@ -361,7 +365,6 @@ public class GameAppGraphical extends JFrame implements ActionListener {
             remove(textToDisplay);
             textToDisplay = new JTextArea("There are currently no items at that spot. Please choose an item you have."
                     + "\n\nInventory:\n" + inventory.getAllItemNames());
-            add(textToDisplay, BorderLayout.CENTER);
         } else {
             getContentPane().removeAll();
             makeMainMenuPanel();
@@ -375,9 +378,10 @@ public class GameAppGraphical extends JFrame implements ActionListener {
                     + "\n\nCurrent Inventory:\n" + inventory.getAllItemNames();
             textToDisplay = new JTextArea(str);
             add(pictureDisplayPanel, BorderLayout.NORTH);
-            add(textToDisplay, BorderLayout.CENTER);
             add(mainMenuPanel, BorderLayout.SOUTH);
         }
+        textToDisplay.setEditable(false);
+        add(textToDisplay, BorderLayout.CENTER);
         validate();
         textToDisplay = new JTextArea("You did not use an item.");
     }
@@ -418,6 +422,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     //         a JTextArea with the textToDisplay, and the mainMenuPanel
     public void displayMainMenu() {
         getContentPane().removeAll();
+        textToDisplay.setEditable(false);
 
         pictureDisplayPanel.setImage("static img");
         add(pictureDisplayPanel, BorderLayout.NORTH);
@@ -490,7 +495,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         } catch (IOException e) {
             textToDisplay = new JTextArea("Unable to read from file: " + JSON_STORE);
         } catch (NoSuchItemExistsException e) {
-            textToDisplay = new JTextArea("Tried to add an item with no associated number: " + e.getMessage());
+            textToDisplay = new JTextArea("Error ading an item to inventory: " + e.getMessage());
         }
         textToDisplay.setEditable(false);
         add(textToDisplay);
@@ -659,7 +664,6 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         field = new JTextField(10);
         changeNamePanel.add(field);
         changeNamePanel.add(enter);
-
     }
 
     //MODIFIES: this
@@ -680,7 +684,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
         enterNamePanel.add(ok, BorderLayout.SOUTH);
     }
 
-    //code taken from alarm controller UI
+    //code referenced from alarm controller UI
 
     /**
      * citation: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
@@ -713,6 +717,7 @@ public class GameAppGraphical extends JFrame implements ActionListener {
     //         - S -> will display current status
     //         - get result of obs -> does the obs result
     //         - else, user quits and will display end msg
+
     /**
      * Invoked when an action occurs.
      */

@@ -119,7 +119,6 @@ public class Inventory {
     //EFFECT: returns all items in inventory stored as a JSONArray
     public JSONArray toJson() {
         JSONArray jsonArray = new JSONArray();
-
         for (Item i : items) {
             jsonArray.put(i.toJson());
         }

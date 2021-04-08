@@ -125,7 +125,7 @@ public class Obstacle {
     //MODIFIES: this
     //EFFECTS: returns result based on option chosen, and also changes
     //         changeInProgress & changeInHealth to reflect chosen option
-    public String getAresult() {
+    private String getAresult() {
         if (chosenOption.equals("A")) {
             changeInProgress = 20;
             changeInHealth = -30;
@@ -144,7 +144,7 @@ public class Obstacle {
     //MODIFIES: this
     //EFFECTS: returns result based on option chosen, and also changes
     //         changeInProgress & changeInHealth to reflect chosen option
-    public String getBresult() {
+    private String getBresult() {
         if (chosenOption.equals("A")) {
             changeInHealth = -30;
             changeInProgress = -10;
@@ -163,7 +163,7 @@ public class Obstacle {
     //MODIFIES: this
     //EFFECTS: returns result based on option chosen, and also changes
     //         changeInProgress & changeInHealth to reflect chosen option
-    public String getCresult() {
+    private String getCresult() {
         if (chosenOption.equals("A")) {
             changeInProgress = -10;
             changeInHealth = -30;
@@ -184,7 +184,7 @@ public class Obstacle {
     //MODIFIES: this
     //EFFECTS: returns result based on option chosen, and also changes
     //         changeInProgress & changeInHealth to reflect chosen option
-    public String getDresult() {
+    private String getDresult() {
         if (chosenOption.equals("A")) {
             changeInProgress = 20;
             changeInHealth = -40;
@@ -204,7 +204,7 @@ public class Obstacle {
     //MODIFIES: this
     //EFFECTS: returns result based on option chosen, and also changes
     //         changeInProgress & changeInHealth to reflect chosen option
-    public String getEresult() {
+    private String getEresult() {
         if (chosenOption.equals("A")) {
             changeInHealth = -40;
             changeInProgress = -10;

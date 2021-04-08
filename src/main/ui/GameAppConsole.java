@@ -420,7 +420,7 @@ public class GameAppConsole {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         } catch (NoSuchItemExistsException e) {
-            System.out.println("Could not add an item with the associated number: ");
+            System.out.println("Error adding an item to inventory: ");
             System.out.println(e.getMessage());
         }
     }

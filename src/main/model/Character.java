@@ -86,10 +86,11 @@ public class Character implements Writable {
 
     //EFFECTS: returns false if health is 0, else returns true
     public boolean stillAlive() {
-        if (health == 0) {
-            return false;
-        }
-        return true;
+//        if (health == 0) {
+//            return false;
+//        }
+//        return true;
+        return !(health == 0);
     }
 
     //EFFECTS: returns this as a JSONObject

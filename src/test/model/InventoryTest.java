@@ -86,6 +86,15 @@ public class InventoryTest {
         test.addItem(c);
         assertEquals(b, test.getItemAtSpot(2));
         assertEquals("[" + a.getName() + ", " + c.getName() + "]", test.getAllItemNames());
+
+        test.addItem(a);
+        test.addItem(b);
+        try {
+            Item item = test.getItemAtSpot(1);
+            assertEquals(a, item);
+        } catch (IndexOutOfBoundsException e) {
+            fail("should not be thrown");
+        }
     }
 
     @Test
@@ -108,14 +117,13 @@ public class InventoryTest {
         } catch (IndexOutOfBoundsException e) {
             //should be thrown
         }
-
         test.addItem(a);
         test.addItem(b);
         try {
-            Item item = test.getItemAtSpot(1);
-            assertEquals(a, item);
+            Item item = test.getItemAtSpot(5);
+            fail("should not reach this point");
         } catch (IndexOutOfBoundsException e) {
-            fail("the exception should not be thrown");
+            //should be caught
         }
     }
 
@@ -156,11 +164,6 @@ public class InventoryTest {
 
     @Test
     public void testGetItemIllegalParameter() {
-//        IllegalArgumentException exc = assertThrows(IllegalArgumentException.class,
-//                () -> { test.getItem("sdf");}
-//        );
-//
-//        assertEquals("can not pass in", exc.getMessage());
         try {
             test.getItem("sdfsdf");
             fail("should not reach this point");

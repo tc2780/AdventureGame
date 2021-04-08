@@ -13,7 +13,7 @@ public class Main {
         try {
             new GameAppGraphical();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Can't run application - file not found");
         }
     }
 }

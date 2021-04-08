@@ -30,6 +30,7 @@ public class JsonReader {
 
     //EFFECTS: reads file with name of variable source, and returns as GameAppData,
     //          throws IOException if there's an error while reading data from file
+    //          throws NoItemExists if an item read does not exist
     public GameAppData read() throws IOException, NoSuchItemExistsException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -39,7 +40,6 @@ public class JsonReader {
     //EFFECTS: reads source file as a string, then returns it, throws IOexception if can't read
     public String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
-
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         }
@@ -47,6 +47,7 @@ public class JsonReader {
     }
 
     //EFFECTS: reads GameAppData from JSONObject, and returns as GameAppData
+    //          throws NoItemExists if an item read does not exist
     private GameAppData parseGameApp(JSONObject jobject) throws NoSuchItemExistsException {
         JSONObject person = jobject.getJSONObject("user");
         JSONArray items = jobject.getJSONArray("inventory");
@@ -66,6 +67,7 @@ public class JsonReader {
     //MODIFIES: inventory
     //EFFECTS: reads items stored in JSONArray, adds it to given inventory,
     //         then returns inventory
+    //          throws NoItemExists if an item read does not exist
     private Inventory addItems(JSONArray items, Inventory inventory) throws NoSuchItemExistsException {
         for (Object json : items) {
             JSONObject item = (JSONObject) json;
@@ -77,14 +79,10 @@ public class JsonReader {
     //MODIFIES: inventory
     //EFFECTS: parses item num from JSONObject, initializes item with its item num,
     //         adds item to inventory, and returns inventory
+    //         throws NoItemExists if item read does not exist
     private Inventory addItem(JSONObject json, Inventory inventory) throws NoSuchItemExistsException {
         int num = json.getInt("item num");
         Item a = new Item(num);
-//        try {
-//            a = new Item(num);
-//        } catch (NoSuchItemExistsException e) {
-//            throw e;
-//        }
         inventory.addItem(a);
         return inventory;
     }

@@ -22,6 +22,7 @@ public class JsonWriterTest {
         try {
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
+            fail("should not reach this point");
         } catch (FileNotFoundException e) {
             //exception expected here -- no file by given name
         }

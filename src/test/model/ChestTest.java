@@ -31,5 +31,7 @@ public class ChestTest {
         items.add(two);
         test2 = new Chest(items);
         assertEquals(2, test2.length());
+        assertEquals(one, test2.getItemAtSpot(1));
+        assertEquals(two, test2.getItemAtSpot(1));
     }
 }
